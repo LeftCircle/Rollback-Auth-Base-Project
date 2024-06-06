@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://16rg0d2e6aso"
+path="res://.godot/imported/Sword hit another sword 9.wav-34c8cd8ed6f3f3e2fdfc08c6a817e02e.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Sword hit another sword/Sword hit another sword 9.wav"
+dest_files=["res://.godot/imported/Sword hit another sword 9.wav-34c8cd8ed6f3f3e2fdfc08c6a817e02e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

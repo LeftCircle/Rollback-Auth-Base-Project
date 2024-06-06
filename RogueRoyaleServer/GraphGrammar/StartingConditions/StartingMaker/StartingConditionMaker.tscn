@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GraphGrammar/StartingConditions/StartingMaker/StartingCondition.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GrammarNodes/Scenes/GrammarNode.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GraphGrammar/GrammarRules/Resources/GrammarRuleSave.gd" type="Script" id=3]
+[ext_resource path="res://GraphGrammar/Springs/Scenes/SpringContainer.tscn" type="PackedScene" id=4]
+
+[node name="StartingCondition" type="Node2D"]
+script = ExtResource( 1 )
+path_to_save_data = "res://GraphGrammar/StartingConditions/StartingConditionData"
+node_scene = ExtResource( 2 )
+starting_save_class = ExtResource( 3 )
+
+[node name="StartingNodes" type="Node2D" parent="."]
+
+[node name="NewNodeButton" type="Button" parent="."]
+offset_left = 6.0
+offset_top = 544.0
+offset_right = 84.0
+offset_bottom = 599.0
+text = "New Node"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="."]
+offset_left = 823.357
+offset_top = 538.52
+offset_right = 1004.36
+offset_bottom = 592.52
+text = "Save Starting Configuration"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+offset_left = 160.0
+offset_top = 7.0
+offset_right = 402.0
+offset_bottom = 21.0
+text = "Starting Graph Grammar Configuration"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartingName" type="LineEdit" parent="."]
+offset_left = 419.0
+offset_top = 4.0
+offset_right = 621.0
+offset_bottom = 28.0
+placeholder_text = "Starting Configuration Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpringContainer" parent="." instance=ExtResource( 4 )]
+
+[connection signal="pressed" from="NewNodeButton" to="." method="_on_NewNodeButton_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]

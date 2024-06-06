@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GraphGrammar/Springs/Scenes/SpringContainer.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/Springs/Scenes/Spring.gd" type="Script" id=2]
+[ext_resource path="res://GraphGrammar/Springs/Scenes/Line.tscn" type="PackedScene" id=3]
+
+[node name="SpringContainer" type="Node2D"]
+script = ExtResource( 1 )
+grammar_spring = ExtResource( 2 )
+line = ExtResource( 3 )

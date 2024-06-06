@@ -1,0 +1,10 @@
+2a60927148abd1d33b818b535e306557
+::res://::1682095440
+icon.svg::CompressedTexture2D::7675337367459919698::1681136038::1681136042::1::::<><>::
+Main.gd::GDScript::-1::1682095360::0::1::::<>Node2D<>::
+Main.tscn::PackedScene::7902337157432902186::1682095428::0::1::::<><>::res://Main.gd
+OtherServer.gd::GDScript::-1::1681153939::0::1::::<>Node2D<>::
+OtherServer.tscn::PackedScene::3199493389669617948::1682095428::0::1::::<><>::res://OtherServer.gd
+::res://Compression/::1682087168
+BaseCompression.gd::GDScript::-1::1682087162::0::1::::BaseCompression<>Resource<>::
+OutputMemoryBitStream.gd::GDScript::-1::1682087168::0::1::::OutputMemoryBitStream<>RefCounted<>::

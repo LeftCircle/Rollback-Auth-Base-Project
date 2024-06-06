@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0inox4b4ww43"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Dodge/C_Dodge.gd" id="1"]
+
+[node name="Dodge" type="Node"]
+script = ExtResource("1")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Assets/Placeholder/UI/HealthFlask.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Placeholder/Shaders/HealingFlask.tres" type="Shader" id=2]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/HealingFlask/HealingFlask.gd" type="Script" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/max_flasks = 5.0
+shader_param/current_flasks = 5.0
+shader_param/background_color = Color( 0, 0, 0, 1 )
+shader_param/flask_color = Color( 0.73, 0.2847, 0.2847, 1 )
+shader_param/no_flask_color = Color( 1, 1, 1, 0.5 )
+shader_param/outline_color = Plane( 1, 1, 1, 1 )
+
+[node name="HealingFlask" type="Sprite2D"]
+material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )

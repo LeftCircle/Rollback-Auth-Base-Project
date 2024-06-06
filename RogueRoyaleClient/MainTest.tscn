@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/PlayerCharacterOLD.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Map/regionGeneration2/RegionFromBorders.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Singletons/Map/Map.gd" type="Script" id=4]
+
+
+
+
+[node name="Dungeon" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="Region" parent="." instance=ExtResource( 2 )]
+n_random_rooms = 6
+
+[node name="BaseCharacter" parent="." instance=ExtResource( 1 )]

@@ -1,0 +1,94 @@
+[gd_scene load_steps=12 format=3 uid="uid://dqatr2dtksicx"]
+
+[ext_resource type="PackedScene" uid="uid://c8y3eo1e1fvkm" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/OverwatchHealth/OverwatchHealth.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/PlayerGUI.gd" id="1_ef8dt"]
+[ext_resource type="Shader" path="res://Assets/Placeholder/Shaders/OverwatchHealth.tres" id="2"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/Ammo.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/RangedWeaponIcon.tscn" id="4"]
+[ext_resource type="Texture2D" uid="uid://c44m2cqgw6yty" path="res://Assets/Placeholder/RangeWeapons/Pistol/Pistol.png" id="5"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/HealingFlask/HealingFlask.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://1sdun6bt0u4w" path="res://Assets/Placeholder/SecondaryWeapons/Shields/Shield.png" id="7"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/PrimaryWeapon.tscn" id="8"]
+[ext_resource type="PackedScene" uid="uid://s23bgcib7g5x" path="res://Scenes/Characters/PlayerCharacter/HUD/LatencyTracker/LatencyTrackerHUD.tscn" id="9"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nst54"]
+resource_local_to_scene = true
+shader = ExtResource("2")
+shader_parameter/health_segments = 5.0
+shader_parameter/armor_segments = 1.0
+shader_parameter/shield_segments = 1.0
+shader_parameter/health_percent = 1.0
+shader_parameter/shield_percent = 1.0
+shader_parameter/armor_percent = 1.0
+shader_parameter/background_color = Color(0, 0, 0, 0.333333)
+shader_parameter/health_color = Color(1, 1, 1, 1)
+shader_parameter/armor_color = Color(1, 1, 0, 1)
+shader_parameter/shield_color = Color(0, 0, 1, 1)
+shader_parameter/no_health = Color(1, 1, 1, 0.180392)
+shader_parameter/outline_color = Vector4(1, 1, 1, 1)
+
+[node name="PlayerGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ef8dt")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="OverwatchHealth" parent="CanvasLayer" instance=ExtResource("1")]
+material = SubResource("ShaderMaterial_nst54")
+position = Vector2(73, 581)
+scale = Vector2(1.375, 0.21875)
+visible_numbers = true
+
+[node name="Ammo" parent="CanvasLayer" instance=ExtResource("3")]
+position = Vector2(969, 580)
+scale = Vector2(1.27267, 0.328431)
+
+[node name="RangedWeaponIcon" parent="CanvasLayer" instance=ExtResource("4")]
+offset_left = 896.0
+offset_top = 559.0
+offset_right = 928.0
+offset_bottom = 591.0
+texture = ExtResource("5")
+
+[node name="HealingFlask" parent="CanvasLayer" instance=ExtResource("6")]
+position = Vector2(16, 575)
+
+[node name="PrimaryWeaponIcon" parent="CanvasLayer" instance=ExtResource("8")]
+layout_mode = 3
+anchors_preset = 15
+offset_left = 864.0
+offset_top = 533.0
+offset_right = -128.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RangedWeapon" parent="CanvasLayer" instance=ExtResource("8")]
+layout_mode = 3
+anchors_preset = 15
+offset_left = 902.0
+offset_top = 533.0
+offset_right = -90.0
+offset_bottom = -35.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" parent="CanvasLayer/RangedWeapon" index="0"]
+layout_mode = 0
+
+[node name="TextureRect" parent="CanvasLayer/RangedWeapon" index="1"]
+layout_mode = 0
+texture = ExtResource("7")
+
+[node name="LatencyTrackerHUD" parent="CanvasLayer" instance=ExtResource("9")]
+offset_left = 880.0
+offset_top = 4.0
+offset_right = 880.0
+offset_bottom = 4.0
+
+[editable path="CanvasLayer/RangedWeapon"]

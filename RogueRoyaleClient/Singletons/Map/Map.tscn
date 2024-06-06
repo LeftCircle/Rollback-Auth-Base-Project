@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://bsh28p8r0j1xc"]
+
+[ext_resource type="PackedScene" path="res://Scenes/Map/RegionGeneration/RegionFromGrammar/ProceduralGeneration/PathsBetweenRoomGenerater.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/TileMaps/FirstFloor/Floor/FirstFloorFloors.tscn" id="2"]
+[ext_resource type="Script" path="res://Singletons/Map/Map.gd" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/Paths/FirstFloor/FirstFloorPath.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/TileMaps/FirstFloor/Walls/Walls.tscn" id="5"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("3")
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="PathsGenerater" parent="." instance=ExtResource("1")]
+
+[node name="FirstFloorPath" parent="." instance=ExtResource("4")]
+format = 2
+
+[node name="FirstFloorFloors" parent="." instance=ExtResource("2")]
+format = 2
+
+[node name="FirstFloorWalls" parent="." instance=ExtResource("5")]
+format = 2
+
+[connection signal="paths_completed" from="PathsGenerater" to="." method="_on_PathsGenerater_paths_completed"]

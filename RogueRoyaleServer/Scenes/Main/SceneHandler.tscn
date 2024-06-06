@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://d6n4vhjv2ah6"]
+
+[ext_resource type="PackedScene" uid="uid://bldcjbcmy0f47" path="res://Scenes/ServerCharacter/BasicPlayer.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Main/SceneHandler.gd" id="2"]
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource("2")
+
+[node name="BasicPlayer" parent="." instance=ExtResource("1")]
+
+[editable path="BasicPlayer"]

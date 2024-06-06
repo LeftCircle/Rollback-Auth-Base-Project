@@ -1,0 +1,52 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 low_health_color = vec4(1.0, 0.0, 0.0, 1.0);
+uniform vec4 full_health_color = vec4(0.0, 1.0, 0.0, 1.0);
+uniform vec4 background_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 mid_health_color = vec4(1.0, 1.0, 0.0, 1.0);
+uniform float health : hint_range(0.0, 1.0) = 1.0;
+uniform float low_health_range : hint_range(0.0, 0.25) = 0.2;
+uniform float high_health_range : hint_range(0.5, 1.0) = 0.8;
+uniform float flash_frequency : hint_range(0.0, 10.0) = 3;
+uniform float flash_amplitude : hint_range(0.0, 1.0) = 0.2;
+
+float lerp(float a, float b, float t){
+	return (1.0 - t) * a + t * b;
+}
+
+vec4 lerpv4(vec4 a, vec4 b, float t){
+	return vec4(lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t), lerp(a.w, b.w, t));
+}
+
+vec3 lerpv3(vec3 a, vec3 b, float t){
+	return vec3(lerp(a.x, b.x, t), lerp(a.y, b.y, t), lerp(a.z, b.z, t));
+}
+
+float inverse_lerp(float a, float b, float v){
+	return clamp((v - a) / (b - a), 0.0, 1.0);
+}
+
+void fragment() {
+	float mid_mask = float(health < high_health_range);
+	mid_mask = mid_mask * float(health > low_health_range);
+	float healthbar_mask = float((health < UV.x));
+	vec3 lhc = low_health_color.xyz;
+	vec3 fhc = full_health_color.xyz;
+	float t_health_color = inverse_lerp(low_health_range, high_health_range, health);
+	
+	vec4 bar_color_v4 = lerpv4(low_health_color, full_health_color, t_health_color);
+	vec4 lerped_mid_health_color = lerpv4(low_health_color, mid_health_color, t_health_color);
+	bar_color_v4 = lerpv4(bar_color_v4, lerped_mid_health_color, mid_mask);
+	
+	float flash = 1.0 + flash_amplitude * cos(TIME * flash_frequency);
+	if (health > low_health_range){
+		flash = 1.0;
+	}
+	bar_color_v4 *= flash;
+	COLOR = lerpv4(bar_color_v4, background_color, healthbar_mask);
+	
+}"

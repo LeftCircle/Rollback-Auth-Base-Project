@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Assets/GUI/Player/HealthBarOver.png" type="Texture2D" id=1]
+[ext_resource path="res://Scenes/GUI/HealthBar.gd" type="Script" id=2]
+
+[node name="HealthBar" type="TextureProgressBar"]
+offset_left = -70.5455
+offset_top = -71.5546
+offset_right = 79.4545
+offset_bottom = -31.5546
+value = 100.0
+rounded = true
+texture_progress = ExtResource( 1 )
+tint_under = Color( 0, 0, 0, 1 )
+tint_progress = Color( 1, 0, 0, 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

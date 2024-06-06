@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://placeholder_textures/open_world_tiles/3.png" type="Texture2D" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+size = Vector2( 32, 32 )
+
+[node name="StaticBody2D" type="StaticBody2D"]
+position = Vector2( 32, 64 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -32 )
+shape = SubResource( 1 )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2( 0, -32 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 2

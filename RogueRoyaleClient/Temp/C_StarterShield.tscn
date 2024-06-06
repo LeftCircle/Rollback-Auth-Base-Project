@@ -1,0 +1,401 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/MeleeWeapons/Secondary/Shields/StarterShield/ShieldWeaponData.gd" id="1"]
+[ext_resource type="Script" path="res://Scenes/Weapons/MeleeWeapons/Secondary/Shields/ParryBox.gd" id="2"]
+[ext_resource type="Script" path="res://Scenes/Weapons/MeleeWeapons/Secondary/Shields/StarterShield/C_StarterShield.gd" id="3"]
+[ext_resource type="Script" path="res://Netcode/Scenes/RollbackAnimation/RollbackAnimationPlayer.gd" id="4"]
+[ext_resource type="Script" path="res://Scenes/Weapons/MeleeWeapons/Secondary/Shields/BlockBox.gd" id="5"]
+[ext_resource type="Texture2D" uid="uid://1sdun6bt0u4w" path="res://Assets/Placeholder/SecondaryWeapons/Shields/Shield.png" id="6"]
+[ext_resource type="Script" path="res://Shared/Scenes/RollbackAnimation/AnimationTree/RollbackAnimationTreeStateMachine.gd" id="7"]
+[ext_resource type="Script" path="res://Scenes/Characters/BaseResources/NodeInterpolater.gd" id="8"]
+
+[sub_resource type="RectangleShape2D" id=2]
+resource_local_to_scene = true
+size = Vector2( 13, 12 )
+
+[sub_resource type="Animation" id=1]
+resource_name = "Attack_0"
+length = 0.25
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.05, 0.25 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.1, 0.1 ), Vector2( 3.368, 2 ), Vector2( 2, 2 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Hitbox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BlockBox/BlockBoxShape:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PackedFloat32Array( 0, 0.0333333 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0, 0.233333 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_attack_started"
+}, {
+"args": [  ],
+"method": "_on_attack_ended"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ParryBox/ParryBoxShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("NodeInterpolater/Shield:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0, 0.25 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath(".:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PackedFloat32Array( 0, 0.25 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Attack_1"
+length = 0.333334
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.233333, 0.3, 0.333333 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 2, 2 ), Vector2( 2.273, 2 ), Vector2( 2.355, 2 ), Vector2( 2, 2 ), Vector2( 2, 2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BlockBox/BlockBoxShape:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.233333 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath(".:player_speed")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PackedFloat32Array( 1, -0.25, 0, 0.017, 1.157, 2, -0.017, -0.761, 0.05, 0.154, 4, -0.033, -0.409, 0.033, -0.409, 1, -0.017, -0.043, 0.033, -0.216 ),
+"times": PackedFloat32Array( 0, 0.0333333, 0.15, 0.233333 )
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0, 0.316667 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_attack_started"
+}, {
+"args": [  ],
+"method": "_on_attack_ended"
+} ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("ParryBox/ParryBoxShape:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.233333 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Hitbox:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.233333 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/6/type = "method"
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PackedFloat32Array( 0, 0.0333333, 0.15, 0.3 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1 ),
+"values": [ {
+"args": [ 0 ],
+"method": "_adjust_radius"
+}, {
+"args": [ -4 ],
+"method": "_adjust_radius"
+}, {
+"args": [ 12 ],
+"method": "_adjust_radius"
+}, {
+"args": [ 0 ],
+"method": "_adjust_radius"
+} ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("NodeInterpolater/Shield:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PackedFloat32Array( 0, 0.333333 ),
+"transitions": PackedFloat32Array( 1, 1 ),
+"update": 1,
+"values": [ true, true ]
+}
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Hitbox:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("BlockBox/BlockBoxShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath(".:player_speed")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PackedFloat32Array( 1, -0.25, 0, 0.25, 0 ),
+"times": PackedFloat32Array( 0 )
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("ParryBox/ParryBoxShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("NodeInterpolater/Shield:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ false ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath(".:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="RectangleShape2D" id=6]
+resource_local_to_scene = true
+size = Vector2( 13, 12 )
+
+[sub_resource type="RectangleShape2D" id=5]
+resource_local_to_scene = true
+size = Vector2( 13, 12 )
+
+[sub_resource type="AnimationNodeStateMachine" id=7]
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=8]
+
+[node name="StarterShield" type="Area2D"]
+collision_layer = 2
+collision_mask = 30
+script = ExtResource( 3 )
+radius = 4.0
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
+method_call_mode = 1
+anims/Attack_0 = SubResource( 1 )
+anims/Attack_1 = SubResource( 4 )
+anims/RESET = SubResource( 3 )
+script = ExtResource( 4 )
+
+[node name="ParryBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource( 2 )
+
+[node name="ParryBoxShape" type="CollisionShape2D" parent="ParryBox"]
+shape = SubResource( 6 )
+disabled = true
+
+[node name="BlockBox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 20
+script = ExtResource( 5 )
+
+[node name="BlockBoxShape" type="CollisionShape2D" parent="BlockBox"]
+shape = SubResource( 5 )
+disabled = true
+
+[node name="NodeInterpolater" type="Node2D" parent="."]
+script = ExtResource( 8 )
+
+[node name="Shield" type="Sprite2D" parent="NodeInterpolater"]
+visible = false
+z_index = 1
+texture = ExtResource( 6 )
+offset = Vector2( 0, -4 )
+
+[node name="WeaponData" type="Node" parent="."]
+script = ExtResource( 1 )
+equip_type = 1
+class_type = "tank"
+base_damage = 25
+physical_hit_effect = 2
+knockback_speed = 800
+knockback_frames = 32
+max_sequence = 0
+attack_sequence = 0
+speed_mod = 1.0
+main_animation_ended = false
+is_looping = false
+damage_mod = 0.0
+knockback_mod = 0.0
+
+[node name="RollbackAnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 7 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+process_mode = 2
+parameters/playback = SubResource( 8 )
+script = ExtResource( 7 )

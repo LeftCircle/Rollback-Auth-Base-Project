@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://btf1tpvqe08hs"]
+
+[ext_resource type="PackedScene" path="res://Scenes/GUI/Menus/Login.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/GUI/Menus/Lobby.tscn" id="2"]
+[ext_resource type="Script" path="res://Scenes/Main/SceneHandler.gd" id="4"]
+
+[node name="SceneHandler" type="Node"]
+script = ExtResource("4")
+client_test_scene = "res://MapInfo/DungeonRooms/HandMade/SpawnRooms/FirstFloorSpawn.tscn"
+lobby = ExtResource("2")
+
+[node name="LoginScreen" parent="." instance=ExtResource("1")]
+layout_mode = 3
+anchors_preset = 15
+offset_left = 0.0
+grow_horizontal = 2
+grow_vertical = 2

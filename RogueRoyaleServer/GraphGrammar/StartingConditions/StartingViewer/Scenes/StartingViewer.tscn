@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://GraphGrammar/StartingConditions/StartingViewer/Scenes/StartingViewer.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GrammarRules/Resources/GRuleInfoReader.gd" type="Script" id=2]
+[ext_resource path="res://GraphGrammar/GrammarNodes/Scenes/LoadedNode.tscn" type="PackedScene" id=3]
+
+[node name="StartingViewer" type="Node2D"]
+script = ExtResource( 1 )
+loaded_node_scene = ExtResource( 3 )
+rule_info_reader = ExtResource( 2 )
+
+[node name="FileBrowser" type="FileDialog" parent="."]
+visible = true
+offset_left = 337.987
+offset_top = 185.737
+offset_right = 736.987
+offset_bottom = 435.737
+window_title = "Open a File"
+mode = 0
+current_dir = "res://GraphGrammar/StartingConditions/StartingConditionData"
+current_file = "test_data.res"
+current_path = "res://GraphGrammar/StartingConditions/StartingConditionData/test_data.res"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+offset_right = 85.0
+offset_bottom = 38.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartingScene" type="Node2D" parent="."]
+
+[node name="SelectStartButton" type="Button" parent="."]
+visible = false
+offset_left = 868.0
+offset_top = 3.0
+offset_right = 1017.0
+offset_bottom = 23.0
+text = "Select Start Condition"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="file_selected" from="FileBrowser" to="." method="_on_FileBrowser_file_selected"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="SelectStartButton" to="." method="_on_SelectStartButton_pressed"]

@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://GraphGrammar/GraphBuilder/GraphBuilder.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GrammarRules/RuleViewer/Scenes/RuleViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GraphGrammar/StartingConditions/StartingViewer/Scenes/StartingViewer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GraphGrammar/GraphBuilder/GUIS/RuleSelector.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Scenes/ServerCharacter/BasicPlayer.tscn" type="PackedScene" id=5]
+
+[node name="GraphBuilder" type="Node2D"]
+script = ExtResource( 1 )
+server_char = ExtResource( 5 )
+
+[node name="StartingViewer" parent="." instance=ExtResource( 3 )]
+
+[node name="GrammarGraph" type="Node2D" parent="."]
+
+[node name="RuleSelector" parent="." instance=ExtResource( 4 )]
+visible = false
+offset_left = 475.0
+offset_top = 2.0
+offset_right = 1019.0
+offset_bottom = 233.0
+
+[node name="RuleViewer" parent="." instance=ExtResource( 2 )]
+visible = false
+
+[node name="ApplyRulesButton" type="Button" parent="."]
+visible = false
+offset_left = 17.9798
+offset_top = 542.387
+offset_right = 103.98
+offset_bottom = 590.387
+text = "Apply Rules"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NodeContainer" type="Node2D" parent="."]
+
+[node name="SpringContainer" type="Node2D" parent="."]
+
+[node name="SaveButton" type="Button" parent="."]
+visible = false
+offset_left = 3.0
+offset_top = 559.0
+offset_right = 83.0
+offset_bottom = 598.0
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FinalSaveGUI" type="FileDialog" parent="."]
+offset_left = 340.0
+offset_top = 171.0
+offset_right = 739.0
+offset_bottom = 443.0
+window_title = "Pick a directory to save in"
+mode_overrides_title = false
+mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GrammarName" type="LineEdit" parent="."]
+visible = false
+offset_left = 393.0
+offset_top = 3.0
+offset_right = 680.0
+offset_bottom = 27.0
+placeholder_text = "Grammar Name"
+
+[connection signal="pressed" from="ApplyRulesButton" to="." method="_on_ApplyRulesButton_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="dir_selected" from="FinalSaveGUI" to="." method="_on_FinalSaveGUI_dir_selected"]

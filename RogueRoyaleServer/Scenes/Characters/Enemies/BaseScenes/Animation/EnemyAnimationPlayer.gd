@@ -1,0 +1,3 @@
+extends BaseAnimationDriver
+class_name EnemyAnimationPlayer
+

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://gq8qujtt3d72"]
+
+[ext_resource type="Script" path="res://Tools/LineCounter.gd" id="1_kxbgw"]
+
+[node name="LineCounter" type="Node"]
+script = ExtResource("1_kxbgw")
+file_array = Array[String](["res://ComponentData/", "res://GraphGrammar/", "res://Netcode/", "res://Resources/", "res://Scenes/", "res://Shared/", "res://Singletons/", "res://Tests/"])

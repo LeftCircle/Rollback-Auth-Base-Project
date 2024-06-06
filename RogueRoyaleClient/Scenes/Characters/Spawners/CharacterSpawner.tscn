@@ -1,0 +1,12 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Scenes/Characters/Spawners/CharacterSpanwer.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/ClientPlayerCharacter.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/LagCompPlayerTemplate.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/PlayerTemplate.tscn" type="PackedScene" id=4]
+
+[node name="CharacterSpawner" type="Node"]
+script = ExtResource( 1 )
+player_character_scene = ExtResource( 2 )
+lag_comp_template = ExtResource( 3 )
+rollback_template = ExtResource( 4 )

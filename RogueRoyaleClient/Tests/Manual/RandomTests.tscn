@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://cda7xmcqq4q3j"]
+
+[ext_resource type="Script" path="res://Tests/Manual/RandomTests.gd" id="1_nerld"]
+[ext_resource type="Texture2D" uid="uid://ojr352rqyisr" path="res://icon.png" id="2_7ruab"]
+
+[sub_resource type="Animation" id="Animation_tvddf"]
+resource_name = "Null"
+
+[sub_resource type="Animation" id="Animation_e2gy8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(326, 139)]
+}
+
+[sub_resource type="Animation" id="Animation_lfqu4"]
+resource_name = "Test"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.55, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(326, 139), Vector2(579, 139), Vector2(326, 139)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ky3em"]
+_data = {
+"Null": SubResource("Animation_tvddf"),
+"RESET": SubResource("Animation_e2gy8"),
+"Test": SubResource("Animation_lfqu4")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n2bs0"]
+animation = &"Null"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ljow7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ieby"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_7n31n"]
+states/Null/node = SubResource("AnimationNodeAnimation_n2bs0")
+states/Null/position = Vector2(364, 100)
+transitions = ["Start", "Null", SubResource("AnimationNodeStateMachineTransition_ljow7"), "Null", "End", SubResource("AnimationNodeStateMachineTransition_3ieby")]
+
+[node name="RandomTests" type="Node2D"]
+script = ExtResource("1_nerld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(326, 139)
+texture = ExtResource("2_7ruab")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
+libraries = {
+"": SubResource("AnimationLibrary_ky3em")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+callback_mode_process = 2
+libraries = {
+"": SubResource("AnimationLibrary_ky3em")
+}
+tree_root = SubResource("AnimationNodeStateMachine_7n31n")
+anim_player = NodePath("../AnimationPlayer")

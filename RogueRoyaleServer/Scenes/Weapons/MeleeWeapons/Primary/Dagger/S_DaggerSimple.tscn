@@ -1,0 +1,555 @@
+[gd_scene load_steps=45 format=3 uid="uid://dwyxdallyf3xb"]
+
+[ext_resource type="Script" path="res://Scenes/Weapons/MeleeWeapons/Primary/Dagger/S_Dagger.gd" id="2"]
+[ext_resource type="PackedScene" path="res://Scenes/Weapons/Components/WeaponData.tscn" id="2_dfsgp"]
+[ext_resource type="Script" path="res://Shared/Scenes/RollbackAnimation/WeaponAnimationTree/WeaponRollbackAnimationTreeStateMachine.gd" id="7_82nx3"]
+
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(25, 20)
+
+[sub_resource type="Animation" id="7"]
+resource_name = "Anticipation"
+length = 0.0833333
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponData:main_animation_ended")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.085),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponData:speed_mod")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="3"]
+resource_name = "Attack_1"
+length = 0.750002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.316667, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.75, 1.75), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:main_animation_ended")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.55),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponData:speed_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.55)
+}
+
+[sub_resource type="Animation" id="78"]
+resource_name = "Attack_2_Simple"
+length = 0.750003
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.283334, 0.533334),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.616668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(1.75, 1.75), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:main_animation_ended")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.550001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponData:speed_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.316667)
+}
+
+[sub_resource type="Animation" id="79"]
+resource_name = "Attack_3_Simple"
+length = 0.533334
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.266667, 0.283333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 1.5), Vector2(2, 1.5), Vector2(2, 1.5), Vector2(1.5, 1.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:main_animation_ended")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponData:speed_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.25, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.533334)
+}
+
+[sub_resource type="Animation" id="10"]
+resource_name = "ChargeAttack"
+length = 0.800002
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [360.0, -360.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hitbox:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.533334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:main_animation_ended")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.783333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["Charge Attack"],
+"method": &"debug_animation_played"
+}]
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponData:speed_mod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="8"]
+resource_name = "Charging"
+length = 0.500001
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.5, 1.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponData:main_animation_ended")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:is_looping")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponData:speed_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="56"]
+resource_name = "Combo"
+length = 0.750003
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.350001, 0.366667, 0.500001, 0.516668, 0.750001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponData:main_animation_ended")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.750001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hitbox:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("WeaponData:main_animation_ended")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("WeaponData:is_looping")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("WeaponData:damage_mod")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("WeaponData:speed_mod")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NodeInterpolater/Pivot2D2/PlayerSprite:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aaqu3"]
+_data = {
+"Anticipation": SubResource("7"),
+"Attack_1": SubResource("3"),
+"Attack_2_Simple": SubResource("78"),
+"Attack_3_Simple": SubResource("79"),
+"ChargeAttack": SubResource("10"),
+"Charging": SubResource("8"),
+"Combo": SubResource("56"),
+"RESET": SubResource("6")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="30"]
+animation = &"Anticipation"
+
+[sub_resource type="AnimationNodeAnimation" id="72"]
+animation = &"Attack_1"
+
+[sub_resource type="AnimationNodeAnimation" id="32"]
+animation = &"Attack_2_Simple"
+
+[sub_resource type="AnimationNodeAnimation" id="34"]
+animation = &"ChargeAttack"
+
+[sub_resource type="AnimationNodeAnimation" id="35"]
+animation = &"Charging"
+
+[sub_resource type="AnimationNodeAnimation" id="80"]
+animation = &"Combo"
+
+[sub_resource type="AnimationNodeAnimation" id="33"]
+animation = &"Attack_3_Simple"
+
+[sub_resource type="AnimationNodeAnimation" id="37"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="38"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="39"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="44"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="47"]
+advance_condition = &"charging_advance"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="53"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="57"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="58"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="60"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="61"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="62"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="64"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="65"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="66"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="67"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="73"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="74"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="75"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="76"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="77"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="81"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="82"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="83"]
+
+[sub_resource type="AnimationNodeStateMachine" id="54"]
+states/Anticipation/node = SubResource("30")
+states/Anticipation/position = Vector2(265, 118)
+states/Attack_1/node = SubResource("72")
+states/Attack_1/position = Vector2(478, 118)
+states/Attack_2/node = SubResource("32")
+states/Attack_2/position = Vector2(691, 118)
+states/ChargeAttack/node = SubResource("34")
+states/ChargeAttack/position = Vector2(478, 262)
+states/Charging/node = SubResource("35")
+states/Charging/position = Vector2(249, 262)
+states/Combo/node = SubResource("80")
+states/Combo/position = Vector2(71, 262)
+states/End/position = Vector2(975, 66)
+states/Finisher/node = SubResource("33")
+states/Finisher/position = Vector2(894, 118)
+states/RESET/node = SubResource("37")
+states/RESET/position = Vector2(71, 118)
+states/Start/position = Vector2(114, 40)
+transitions = ["RESET", "Anticipation", SubResource("38"), "Anticipation", "RESET", SubResource("39"), "Attack_2", "Finisher", SubResource("44"), "Anticipation", "Charging", SubResource("47"), "Attack_2", "Charging", SubResource("53"), "Charging", "ChargeAttack", SubResource("57"), "Charging", "RESET", SubResource("58"), "Attack_2", "RESET", SubResource("60"), "Finisher", "RESET", SubResource("61"), "ChargeAttack", "RESET", SubResource("62"), "RESET", "Attack_2", SubResource("64"), "RESET", "Finisher", SubResource("65"), "RESET", "ChargeAttack", SubResource("66"), "RESET", "Charging", SubResource("67"), "RESET", "Attack_1", SubResource("73"), "Anticipation", "Attack_1", SubResource("74"), "Attack_1", "RESET", SubResource("75"), "Attack_1", "Attack_2", SubResource("76"), "Attack_1", "Charging", SubResource("77"), "RESET", "Combo", SubResource("81"), "Combo", "RESET", SubResource("82"), "Anticipation", "Combo", SubResource("83")]
+graph_offset = Vector2(-36.0318, 7.02227)
+
+[node name="Dagger" type="Area2D"]
+scale = Vector2(1.71875, 1.71875)
+collision_layer = 2
+collision_mask = 30
+script = ExtResource("2")
+
+[node name="Hitbox" type="CollisionShape2D" parent="."]
+position = Vector2(25, 0)
+shape = SubResource("2")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_method = 1
+libraries = {
+"": SubResource("AnimationLibrary_aaqu3")
+}
+
+[node name="WeaponData" parent="." instance=ExtResource("2_dfsgp")]
+base_damage = 5
+physical_hit_effect = 2
+knockback_speed = 500
+knockback_decay = 3500
+max_sequence = 3
+attack_sequence = 0
+speed_mod = 1.0
+main_animation_ended = false
+is_looping = false
+damage_mod = 0.0
+knockback_mod = 0.0
+
+[node name="RollbackAnimationTree" type="AnimationTree" parent="."]
+process_mode = 2
+libraries = {
+"": SubResource("AnimationLibrary_aaqu3")
+}
+tree_root = SubResource("54")
+anim_player = NodePath("../AnimationPlayer")
+parameters/conditions/charging_advance = false
+script = ExtResource("7_82nx3")

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Tests/01_TestScenes/Enemy/Test_Enemies.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Characters/Enemies/BasicEnemies/Dummy/EnemyDummy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/FileListerResource.tres" type="Resource" id=4]
+
+
+[node name="EnemyTests" type="Node2D"]
+script = ExtResource( 1 )
+file_lister = ExtResource( 4 )
+
+[node name="EnemyDummy" parent="." instance=ExtResource( 3 )]
+position = Vector2( 117, -4 )
+
+[node name="EnemyDummy2" parent="." instance=ExtResource( 3 )]
+position = Vector2( -109, 0 )
+
+[editable path="EnemyDummy"]

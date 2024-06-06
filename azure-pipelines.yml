@@ -1,0 +1,30 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+jobs:
+- deployment: VMDeploy
+  displayName: Deploy to VM
+  environment: 
+   name: Rogue Royale Test
+   resourceType: VirtualMachine
+  strategy:
+     runOnce:
+        deploy:   
+          steps:
+            - checkout: self
+              path: ./RogueRoyale
+              persistCredentials: true
+            # - task: PowerShellOnTargetMachines@3
+            #   inputs:
+            #     machines: 20.185.61.230
+            #     scriptType: FilePath
+            #     scriptPath: C:\azagent\A9\_work\1\RogueRoyale\LaunchServers.ps1
+

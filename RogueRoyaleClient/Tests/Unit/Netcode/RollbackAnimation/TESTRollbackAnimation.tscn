@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Tests/Unit/Netcode/RollbackAnimation/RollbackAnimation.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Tests/Unit/Netcode/RollbackAnimation/RollbackAnimationTest.gd" type="Script" id=2]
+
+[node name="TESTRollbackAnimation" type="Node"]
+script = ExtResource( 2 )
+rollback_anim_player = ExtResource( 1 )

@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Assets/Characters/Player/spr_idle.png" type="Texture2D" id=1]
+[ext_resource path="res://Assets/Characters/Player/spr_run.png" type="Texture2D" id=2]
+[ext_resource path="res://Assets/Characters/Player/spr_Melee_Attack_No_Weapon.png" type="Texture2D" id=3]
+[ext_resource path="res://Assets/Characters/Player/spr_Spell_casting.png" type="Texture2D" id=4]
+[ext_resource path="res://Assets/Placeholder/Characters/TempChar/spr_hurt.png" type="Texture2D" id=5]
+[ext_resource path="res://Assets/Placeholder/Characters/TempChar/spr_death.png" type="Texture2D" id=6]
+
+[node name="SpriteContainer" type="Node2D"]
+
+[node name="Run" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 2 )
+hframes = 8
+
+[node name="Idle" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+hframes = 9
+
+[node name="Attack" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+hframes = 10
+
+[node name="Spell" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 4 )
+hframes = 15
+
+[node name="Death" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 6 )
+hframes = 13
+
+[node name="Hurt" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2( 2, 2 )
+texture = ExtResource( 5 )
+hframes = 8

@@ -1,0 +1,109 @@
+[gd_scene load_steps=15 format=3 uid="uid://58dteka81hox"]
+
+[ext_resource type="PackedScene" path="res://Scenes/Characters/Enemies/BaseScenes/EnemyHurtbox.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Characters/Enemies/BasicEnemies/Dummy/Dummy.gd" id="2"]
+[ext_resource type="Script" path="res://Scenes/Characters/Enemies/BaseScenes/EnemyHitbox.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://di6xmavc0rdwo" path="res://Assets/Characters/Enemies/Slime.png" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/GUI/HealthBar.tscn" id="5"]
+[ext_resource type="Script" path="res://Scenes/Characters/Enemies/BaseScenes/Animation/EnemyAnimationPlayer.gd" id="6"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/ComponentMap/C_ComponentMap.gd" id="7_0s5cs"]
+
+[sub_resource type="Animation" id="4"]
+resource_name = "Attack"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.583333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
+[sub_resource type="Animation" id="5"]
+resource_name = "Idle"
+
+[sub_resource type="Animation" id="1"]
+resource_name = "damage"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_odfv6"]
+_data = {
+"Attack": SubResource("4"),
+"Idle": SubResource("5"),
+"damage": SubResource("1")
+}
+
+[sub_resource type="RectangleShape2D" id="3"]
+size = Vector2(42, 29.5)
+
+[sub_resource type="CapsuleShape2D" id="2"]
+radius = 88.3215
+height = 202.773
+
+[sub_resource type="CapsuleShape2D" id="6"]
+radius = 88.32
+height = 202.77
+
+[node name="EnemyDummy" type="CharacterBody2D"]
+script = ExtResource("2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_odfv6")
+}
+script = ExtResource("6")
+
+[node name="HealthBar" parent="." instance=ExtResource("5")]
+
+[node name="EnemyHitbox" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 32
+script = ExtResource("3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+position = Vector2(0, 29)
+shape = SubResource("3")
+disabled = true
+
+[node name="MovementHitbox" type="Area2D" parent="."]
+scale = Vector2(0.2, 0.2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MovementHitbox"]
+position = Vector2(0, 15)
+rotation = 1.58832
+shape = SubResource("2")
+
+[node name="EnemyHurtbox" parent="." instance=ExtResource("1")]
+
+[node name="HurtboxShape" type="CollisionPolygon2D" parent="EnemyHurtbox"]
+polygon = PackedVector2Array(-8.38556, -39.2231, -23.8627, -29.6986, -33.3871, -18.9837, -39.3399, -4.30023, -38.1493, 8.00212, -28.6249, 15.1454, -15.132, 21.495, 1.13885, 21.495, 18.2034, 20.3045, 33.2837, 13.1612, 39.2365, 1.25567, 36.4585, -11.4435, 29.7121, -25.3333, 19.394, -33.6672, 5.90106, -40.4136)
+
+[node name="Components" type="Node2D" parent="."]
+script = ExtResource("7_0s5cs")
+
+[node name="WorldCollisions" type="CollisionShape2D" parent="."]
+position = Vector2(0, 3)
+rotation = 1.5708
+scale = Vector2(0.2, 0.2)
+shape = SubResource("6")

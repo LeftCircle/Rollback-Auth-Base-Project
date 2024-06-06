@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b78niouoshpyi"
+path="res://.godot/imported/Sword Woosh 14.wav-29f828ebfe966ce0dcd1dfa5b3913012.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Sword Wooshes/Sword Woosh 14.wav"
+dest_files=["res://.godot/imported/Sword Woosh 14.wav-29f828ebfe966ce0dcd1dfa5b3913012.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dq8sqbfxoj563"
+path="res://.godot/imported/Dagger woosh 7.wav-60eddfca0794a834007ada1ebe036c1f.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Dagger Wooshes/Dagger woosh 7.wav"
+dest_files=["res://.godot/imported/Dagger woosh 7.wav-60eddfca0794a834007ada1ebe036c1f.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

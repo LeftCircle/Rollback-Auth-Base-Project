@@ -1,0 +1,124 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/LagCompHurtboxSpawner.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/EnemyHitbox.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/EnemyHurtbox.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/Enemies/BasicEnemies/Dummy/Dummy.gd" type="Script" id=4]
+[ext_resource path="res://icon.png" type="Texture2D" id=5]
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/Animation/EnemyAnimationPlayer.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/Collision/CollisionShape2DFrame.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/Collision/CollisionPolygon2DFrame.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Move/S_Move.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/Characters/ModularSystems/ComponentMap/ComponentMap.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Characters/ModularSystems/StateSystem/StateSystem.tscn" type="PackedScene" id=11]
+
+[sub_resource type="Animation" id=5]
+resource_name = "Attack"
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("EnemyHitbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.5, 0.583333 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0.983333 ),
+"transitions": PackedFloat32Array( 1 ),
+"values": [ {
+"args": [  ],
+"method": "_on_attack_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "Idle"
+step = 0.0166667
+
+[sub_resource type="Animation" id=1]
+resource_name = "damage"
+length = 0.2
+
+[sub_resource type="RectangleShape2D" id=3]
+size = Vector2( 42, 29.5 )
+
+[sub_resource type="RectangleShape2D" id=4]
+resource_local_to_scene = true
+size = Vector2( 1920, 1920 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 88.3215
+height = 202.773
+
+[node name="EnemyDummy" type="CharacterBody2D"]
+collision_layer = 1024
+script = ExtResource( 4 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
+anims/Attack = SubResource( 5 )
+anims/Idle = SubResource( 6 )
+anims/damage = SubResource( 1 )
+script = ExtResource( 6 )
+
+[node name="EnemyHitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyHitbox"]
+position = Vector2( 0, 29 )
+shape = SubResource( 3 )
+disabled = true
+script = ExtResource( 7 )
+
+[node name="EnemyHurtbox" parent="." instance=ExtResource( 3 )]
+collision_layer = 16
+collision_mask = 2
+
+[node name="HurtboxShape" type="CollisionPolygon2D" parent="EnemyHurtbox"]
+polygon = PackedVector2Array( -8.38556, -39.2231, -23.8627, -29.6986, -33.3871, -18.9837, -39.3399, -4.30023, -38.1493, 8.00212, -28.6249, 15.1454, -15.132, 21.495, 1.13885, 21.495, 18.2034, 20.3045, 33.2837, 13.1612, 39.2365, 1.25567, 36.4585, -11.4435, 29.7121, -25.3333, 19.394, -33.6672, 5.90106, -40.4136 )
+disabled = true
+script = ExtResource( 8 )
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource( 5 )
+
+[node name="LagCompHurtboxSpawner" parent="." instance=ExtResource( 1 )]
+entity_path = NodePath("..")
+hurtbox_path = NodePath("../EnemyHurtbox")
+
+[node name="CollisionShape2D" parent="LagCompHurtboxSpawner" index="0"]
+visible = false
+shape = SubResource( 4 )
+
+[node name="WorldCollisions" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 3 )
+rotation = 1.5708
+scale = Vector2( 0.2, 0.2 )
+shape = SubResource( 2 )
+
+[node name="Components" type="Node2D" parent="."]
+script = ExtResource( 10 )
+
+[node name="Move" type="Node2D" parent="Components"]
+unique_name_in_owner = true
+script = ExtResource( 9 )
+friction = 10000
+acceleration = 10000
+max_speed = 120
+
+[node name="StateSystem" parent="Components" instance=ExtResource( 11 )]
+
+[editable path="LagCompHurtboxSpawner"]

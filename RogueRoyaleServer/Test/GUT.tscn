@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2kxtbjqm5143"]
+
+[ext_resource type="Script" path="res://Test/CustomGut.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://c0mnu6wp3n2ko" path="res://addons/gut/GutScene.tscn" id="3_3xpew"]
+[ext_resource type="Script" path="res://addons/gut/plugin_control.gd" id="3_f7v8n"]
+
+[node name="Tests" type="Node2D"]
+script = ExtResource("2")
+
+[node name="Gut" parent="." instance=ExtResource("3_3xpew")]
+visible = false
+custom_minimum_size = Vector2(740, 250)
+script = ExtResource("3_f7v8n")
+_font_name = "AnonymousPro"
+_font_size = 20
+_font_color = Color(0.8, 0.8, 0.8, 1)
+_background_color = Color(0.15, 0.15, 0.15, 1)
+_color_output = true
+_select_script = ""
+_tests_like = ""
+_inner_class_name = ""
+_run_on_load = false
+_should_maximize = false
+_should_print_to_console = true
+_show_orphans = true
+_log_level = 1
+_yield_between_tests = true
+_disable_strict_datatype_checks = false
+_file_prefix = "TEST"
+_file_suffix = ".gd"
+_inner_class_prefix = "Test"
+_temp_directory = "user://gut_temp_directory"
+_export_path = ""
+_include_subdirectories = false
+_directory1 = "res://Tests/Unit"
+_directory2 = ""
+_directory3 = ""
+_directory4 = ""
+_directory5 = ""
+_directory6 = ""
+_double_strategy = 1
+_pre_run_script = ""
+_post_run_script = ""
+_junit_xml_file = ""
+_junit_xml_timestamp = false

@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://byfgoo8t5vowu"]
+
+[ext_resource type="Script" path="res://Singletons/ObjectSerialization/PlayerCharacterLoader.gd" id="1"]
+[ext_resource type="PackedScene" uid="uid://c1wx8x5pmuoq2" path="res://Scenes/Characters/PlayerCharacter/ClientPlayerCharacter.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://dytds14faeiek" path="res://Scenes/Characters/PlayerTemplate/PlayerTemplate.tscn" id="3"]
+
+[node name="PlayerCharacterLoader" type="Node"]
+script = ExtResource("1")
+player_template_scene = ExtResource("3")
+player_character_scene = ExtResource("2")

@@ -1,0 +1,174 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="RogueRoyaleServer"
+config/tags=PackedStringArray("lookleft")
+run/main_scene="res://Scenes/Main/SceneHandler.tscn"
+config/features=PackedStringArray("4.2")
+config/icon="res://icon.png"
+
+[autoload]
+
+CommandFrame="*res://Singletons/CommandFrame.gd"
+Server="*res://Singletons/Server.gd"
+HubConnection="*res://Singletons/HubConnection.gd"
+WorldState="*res://Singletons/WorldState/WorldState.gd"
+PlayerVerification="*res://Singletons/PlayerVerification.gd"
+Logging="*res://Singletons/Logging.gd"
+FunctionQueue="*res://Shared/Singletons/FunctionQueue.gd"
+PhysicsFunctions="*res://Singletons/PhysicsFunctions.gd"
+ObjectCreationRegistry="*res://Singletons/ObjectSerialization/ObjectCreationRegistry.tscn"
+Map="*res://Singletons/Map/Map.tscn"
+LatencyTracker="*res://Singletons/Netcode/Latency/LatencyTracker.gd"
+PlayerSyncController="*res://Singletons/Netcode/Latency/PlayerSyncController.gd"
+InputProcessing="*res://Singletons/Netcode/InputProcessing.gd"
+ClientWorldStateMap="*res://Singletons/Netcode/ClientWorldState/ClientWorldStateMap.gd"
+TestCharacterSpawner="*res://Test/CharacterSpawner/TestCharacterSpawner.tscn"
+PlayerStateSync="*res://Singletons/WorldState/PlayerStateSync.gd"
+MapClientSpawner="*res://Singletons/WorldState/MapClientSpawner.gd"
+MoveStateSystem="*res://Singletons/StateSystems/MoveStateSystem/MoveStateSystem.gd"
+SystemController="*res://Singletons/StateSystems/SystemController.gd"
+PlayerInputSystem="*res://Singletons/Systems/PlayerInputSystem.gd"
+DataCopyFunctionWriter="*res://Singletons/OnStartupOnly/DataCopyFunctionWriter.tscn"
+AttackPrimaryStateSystem="*res://Singletons/StateSystems/AttackStateSystem/AttackPrimaryStateSystem.gd"
+AttackSecondaryStateSystem="*res://Singletons/StateSystems/AttackStateSystem/AttackSecondaryStateSystem.gd"
+TimerSystem="*res://Singletons/Systems/TimerSystem.gd"
+KnockBackSystem="*res://Singletons/Systems/KnockBackSystem.gd"
+DodgeStateSystem="*res://Singletons/StateSystems/DodgeSystem/DodgeStateSystem.gd"
+NetcodeFreeComponent="*res://Singletons/Systems/NetcodeFreeSystem/NetcodeFreeComponent.gd"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/gut/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Resources/": "yellow",
+"res://Scenes/": "green",
+"res://Singletons/": "purple",
+"res://Test/": "red"
+}
+
+[global]
+
+Physics=true
+TILE_SIZE=64
+TILE_VEC=Vector2(64, 64)
+PROCESS_AFTER_CF=20
+CF_PROCESS_PRIORITY=0
+PROCESS_LAST=922337203685477632
+COMBAT_EVENT_PROCESS_PRIORITY=1
+health_segment_value=25.0
+input_buffer=0
+REMOTE_BUFFER=1
+rollback_enabled=true
+spawn_test_characters=false
+
+[input]
+
+ui_left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":14,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+ui_right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":15,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+ui_up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":12,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+ui_down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+, Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":13,"pressure":0.0,"pressed":false,"script":null)
+, Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":0,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+zoom_in={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":5,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+zoom_out={
+"deadzone": 0.5,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":4,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+up={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":87,"key_label":0,"unicode":119,"echo":false,"script":null)
+]
+}
+down={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":83,"key_label":0,"unicode":115,"echo":false,"script":null)
+]
+}
+left={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":65,"key_label":0,"unicode":97,"echo":false,"script":null)
+]
+}
+right={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":68,"key_label":0,"unicode":100,"echo":false,"script":null)
+]
+}
+attack_weapon_primary={
+"deadzone": 0.5,
+"events": []
+}
+spell1={
+"deadzone": 0.5,
+"events": []
+}
+dodge={
+"deadzone": 0.5,
+"events": []
+}
+
+[layer_names]
+
+2d_physics/layer_1="World"
+2d_physics/layer_2="PlayerHitbox"
+2d_physics/layer_3="PlayerHurtbox"
+2d_physics/layer_4="MobHitbox"
+2d_physics/layer_5="MobHurtbox"
+2d_physics/layer_6="LagCompHurtbox"
+2d_physics/layer_7="LagCompHurtboxSpawner"
+2d_physics/layer_8="Spawners"
+2d_physics/layer_9="MobAreaOfInterest"
+2d_physics/layer_10="Players"
+2d_physics/layer_11="Mobs"
+2d_physics/layer_12="PastHitboxSpawner"
+
+[physics]
+
+2d/default_gravity=0
+common/enable_pause_aware_picking=true
+2d/run_on_thread=2
+
+[rendering]
+
+environment/defaults/default_environment="res://default_env.tres"
+quality/driver/fallback_to_gles2=true

@@ -1,0 +1,2 @@
+extends NetcodeNode2DComponent
+class_name RangeNetcodeBase

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Spells/Fireball/Fireball.gd" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 31.711
+
+[node name="Fireball" type="Area2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[connection signal="area_entered" from="." to="." method="_on_Fireball_area_entered"]

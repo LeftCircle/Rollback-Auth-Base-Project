@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://ComponentData/S_PlayerState.gd" type="Script" id=1]
+
+
+[resource]
+script = ExtResource( 1 )
+velocity = Vector2( 0, 0 )
+position = Vector2( 0, 0 )
+health = 75
+state = 0
+looking_vector = Vector2( 0, 0 )

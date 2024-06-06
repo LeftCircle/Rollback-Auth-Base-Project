@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1schf0fs7sju"]
+
+[ext_resource type="Script" path="res://Singletons/OnStartupOnly/DataCopyFunctionWriter.gd" id="1"]
+[ext_resource type="Script" path="res://Resources/FileLister.gd" id="2"]
+
+[sub_resource type="Resource" id="1"]
+resource_local_to_scene = true
+script = ExtResource("2")
+folder_path = "res://ComponentData"
+file_ending = ".gd"
+with_sub_folders = false
+list_folders = false
+
+[node name="DataCopyFunctionWriter" type="Node"]
+script = ExtResource("1")
+file_lister = SubResource("1")

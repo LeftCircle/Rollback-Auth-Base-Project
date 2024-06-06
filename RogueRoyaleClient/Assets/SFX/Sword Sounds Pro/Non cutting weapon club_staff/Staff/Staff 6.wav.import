@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dt2cliux8siew"
+path="res://.godot/imported/Staff 6.wav-11237800be824fc72fc179b82a817bd8.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Non cutting weapon club_staff/Staff/Staff 6.wav"
+dest_files=["res://.godot/imported/Staff 6.wav-11237800be824fc72fc179b82a817bd8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

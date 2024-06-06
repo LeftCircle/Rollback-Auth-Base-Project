@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Health/S_Healing.gd" id="1"]
+[ext_resource type="Script" path="res://Shared/Resources/Timers/CommandTimer.gd" id="2"]
+
+[node name="Healing" type="Node"]
+script = ExtResource( 1 )
+
+[node name="HealTimer" type="Node" parent="."]
+script = ExtResource( 2 )
+wait_time_sec = 2.0
+one_shot = true
+self_driven = false
+path_to_node_to_connect_to = NodePath("..")

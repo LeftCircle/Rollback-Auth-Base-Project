@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=3 uid="uid://c8y3eo1e1fvkm"]
+
+[ext_resource type="Shader" path="res://Assets/Placeholder/Shaders/OverwatchHealth.tres" id="1"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/OverwatchHealth/OverwatchHealth.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://ojr352rqyisr" path="res://icon.png" id="3"]
+
+[sub_resource type="ShaderMaterial" id="1"]
+resource_local_to_scene = true
+shader = ExtResource("1")
+shader_parameter/health_segments = 5.0
+shader_parameter/armor_segments = 1.0
+shader_parameter/shield_segments = 1.0
+shader_parameter/health_percent = 1.0
+shader_parameter/shield_percent = 1.0
+shader_parameter/armor_percent = 1.0
+shader_parameter/background_color = Color(0, 0, 0, 0.333333)
+shader_parameter/health_color = Color(1, 1, 1, 1)
+shader_parameter/armor_color = Color(1, 1, 0, 1)
+shader_parameter/shield_color = Color(0, 0, 1, 1)
+shader_parameter/no_health = Color(1, 1, 1, 0.180392)
+shader_parameter/outline_color = Plane(1, 1, 1, 1)
+
+[node name="OverwatchHealth" type="Sprite2D"]
+material = SubResource("1")
+scale = Vector2(1, 0.171875)
+texture = ExtResource("3")
+script = ExtResource("2")
+
+[node name="CurrentHealthLabel" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -58.0
+offset_top = -110.545
+offset_right = -33.0
+offset_bottom = -160.545
+scale = Vector2(0.862692, 5.62537)
+text = "200"
+
+[node name="MaxHealthLabel" type="Label" parent="."]
+offset_left = -7.0
+offset_top = -87.2727
+offset_right = 33.0
+offset_bottom = -73.2727
+scale = Vector2(0.789122, 3.47499)
+text = "/ 200"

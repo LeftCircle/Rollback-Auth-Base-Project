@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://GraphGrammar/GrammarRules/RuleViewer/Scenes/RuleViewer.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GrammarNodes/Scenes/GrammarNode.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GraphGrammar/GrammarRules/Resources/GRuleInfoReader.gd" type="Script" id=3]
+[ext_resource path="res://GraphGrammar/GrammarNodes/Scenes/LoadedNode.tscn" type="PackedScene" id=4]
+
+[node name="RuleViewer" type="Node2D"]
+script = ExtResource( 1 )
+grammar_node_scene = ExtResource( 2 )
+loaded_node_scene = ExtResource( 4 )
+rule_info_reader = ExtResource( 3 )
+
+[node name="FileBrowser" type="FileDialog" parent="."]
+visible = true
+offset_left = 337.987
+offset_top = 185.737
+offset_right = 736.987
+offset_bottom = 435.737
+window_title = "Open a File"
+mode = 0
+
+[node name="LHS" type="Node2D" parent="."]
+
+[node name="RHS" type="Node2D" parent="."]
+
+[node name="BackButton" type="Button" parent="."]
+visible = false
+offset_right = 85.0
+offset_bottom = 38.0
+text = "Back"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelectRuleButton" type="Button" parent="."]
+visible = false
+offset_left = 925.954
+offset_top = 4.49492
+offset_right = 1008.95
+offset_bottom = 24.4949
+text = "Select Rule"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="file_selected" from="FileBrowser" to="." method="_on_FileBrowser_file_selected"]
+[connection signal="pressed" from="BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="SelectRuleButton" to="." method="_on_SelectRuleButton_pressed"]

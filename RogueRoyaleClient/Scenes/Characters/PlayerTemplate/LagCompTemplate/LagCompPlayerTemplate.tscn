@@ -1,0 +1,349 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/LagCompPlayerTemplate.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteRangeWeapon.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlaceholderCharacterSprites.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlaceholderCharacterSprites.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Weapons/MeleeWeapons/Primary/Dagger/C_Dagger.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Scenes/Weapons/RangeWeapons/StarterPistol/C_StarterPistol.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Temp/C_StarterShield.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Dash/C_Dash.gd" type="Script" id=8]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Move/Move.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerHurtbox.gd" type="Script" id=10]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Ammo/AmmoBase.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Stamina/C_Stamina.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Health/BaseHealth.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Health/Healing.tscn" type="PackedScene" id=14]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteStateManager.gd" type="Script" id=15]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteAttackState.gd" type="Script" id=16]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/States/DashPlayerState.gd" type="Script" id=17]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/States/HealthFlaskState.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteIdleState.gd" type="Script" id=19]
+[ext_resource path="res://Scenes/Characters/BaseResources/NodeInterpolater.gd" type="Script" id=20]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteDodgeState.gd" type="Script" id=21]
+[ext_resource path="res://Scenes/Characters/PlayerTemplate/LagCompTemplate/States/RemoteRunState.gd" type="Script" id=22]
+[ext_resource path="res://Netcode/Scenes/RollbackAnimation/RollbackAnimationPlayer.gd" type="Script" id=23]
+[ext_resource path="res://Assets/Characters/Player/spr_roll.png" type="Texture2D" id=24]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/States/KnockBackState.gd" type="Script" id=25]
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/OverwatchHealth/OverwatchHealth.tscn" type="PackedScene" id=26]
+[ext_resource path="res://Assets/Placeholder/Shaders/OverwatchHealth.tres" type="Shader" id=27]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Knockback/C_Knockback.gd" type="Script" id=28]
+[ext_resource path="res://Scenes/Characters/ModularSystems/Dodge/C_Dodge.gd" type="Script" id=29]
+
+
+[sub_resource type="RectangleShape2D" id=1]
+resource_local_to_scene = true
+size = Vector2( 4, 3 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+resource_local_to_scene = true
+height = 10.178
+
+[sub_resource type="Animation" id=4]
+resource_name = "Idle"
+length = 0.6
+loop = true
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("NodeInterpolater/SpriteContainer/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.0666668, 0.133334, 0.2, 0.266667, 0.333334, 0.400001, 0.466668, 0.533334 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("NodeInterpolater/SpriteContainer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"values": [ {
+"args": [ "Idle" ],
+"method": "show_sprite"
+} ]
+}
+
+[sub_resource type="Animation" id=7]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("NodeInterpolater/SpriteContainer/Idle:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("NodeInterpolater/SpriteContainer/Run:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("NodeInterpolater/SpriteContainer/Roll:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ 0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("PlayerHurtbox/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"update": 0,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "Roll"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("NodeInterpolater/SpriteContainer/Roll:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("NodeInterpolater/SpriteContainer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"values": [ {
+"args": [ "Roll" ],
+"method": "show_sprite"
+} ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("PlayerHurtbox/CollisionShape2D:disabled")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PackedFloat32Array( 0, 0.183334, 0.6 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "Run"
+length = 0.4
+loop = true
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/path = NodePath("NodeInterpolater/SpriteContainer/Run:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PackedFloat32Array( 0, 0.0500001, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35 ),
+"transitions": PackedFloat32Array( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("NodeInterpolater/SpriteContainer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PackedFloat32Array( 0 ),
+"transitions": PackedFloat32Array( 1 ),
+"values": [ {
+"args": [ "Run" ],
+"method": "show_sprite"
+} ]
+}
+
+[sub_resource type="ShaderMaterial" id=10]
+resource_local_to_scene = true
+shader = ExtResource( 27 )
+shader_param/health_segments = 5.0
+shader_param/armor_segments = 1.0
+shader_param/shield_segments = 1.0
+shader_param/health_percent = 1.0
+shader_param/shield_percent = 1.0
+shader_param/armor_percent = 1.0
+shader_param/background_color = Color( 0, 0, 0, 0.333333 )
+shader_param/health_color = Color( 1, 1, 1, 1 )
+shader_param/armor_color = Color( 1, 1, 0, 1 )
+shader_param/shield_color = Color( 0, 0, 1, 1 )
+shader_param/no_health = Color( 1, 1, 1, 0.180392 )
+shader_param/outline_color = Plane( 1, 1, 1, 1 )
+
+[node name="LagCompPlayerTemplate" type="CharacterBody2D"]
+collision_layer = 512
+script = ExtResource( 1 )
+attack_primary_state_path = NodePath("PlayerStates/AttackPrimaryState")
+attack_secondary_state_path = NodePath("PlayerStates/AttackSecondaryState")
+ranged_weapon_state_path = NodePath("PlayerStates/RemoteRangedState")
+
+[node name="WorldCollisions" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 8 )
+scale = Vector2( 1.5, 1.5 )
+shape = SubResource( 1 )
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource( 10 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource( 2 )
+
+[node name="ModularSkills" type="Node2D" parent="."]
+
+[node name="Move" parent="ModularSkills" instance=ExtResource( 9 )]
+max_speed = 200
+
+[node name="AmmoBase" parent="ModularSkills" instance=ExtResource( 11 )]
+
+[node name="BaseHealth" parent="ModularSkills" instance=ExtResource( 13 )]
+
+[node name="Healing" parent="ModularSkills" instance=ExtResource( 14 )]
+health_component_path = NodePath("../BaseHealth")
+
+[node name="ClientStamina" parent="ModularSkills" instance=ExtResource( 12 )]
+stamina_visualizer_container_path = NodePath("../../NodeInterpolater/StaminaVisualizer")
+
+[node name="Dash" type="Node" parent="ModularSkills"]
+script = ExtResource( 8 )
+animation_player_path = NodePath("../../AnimationPlayer")
+stamina_path = NodePath("../ClientStamina")
+move_path = NodePath("../Move")
+dash_seconds = 0.15
+
+[node name="Dagger" parent="ModularSkills" instance=ExtResource( 5 )]
+move_path = NodePath("../Move")
+
+[node name="StarterShield" parent="ModularSkills" instance=ExtResource( 7 )]
+move_path = NodePath("../Move")
+radius = 32.0
+
+[node name="Pistol" parent="ModularSkills" instance=ExtResource( 6 )]
+radius = 15.0
+
+[node name="C_Dodge" type="Node" parent="ModularSkills"]
+script = ExtResource( 29 )
+move_module_path = NodePath("../Move")
+animation_path = NodePath("../../AnimationPlayer")
+stamina_path = NodePath("../ClientStamina")
+
+[node name="Knockback" type="Node" parent="ModularSkills"]
+script = ExtResource( 28 )
+move_path = NodePath("../Move")
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="PlayerStates" type="Node" parent="."]
+script = ExtResource( 15 )
+entity_path = NodePath("..")
+animation_path = NodePath("../AnimationPlayer")
+state_group_name = "RemoteState"
+
+[node name="AttackPrimaryState" type="Node" parent="PlayerStates"]
+script = ExtResource( 16 )
+
+[node name="AttackSecondaryState" type="Node" parent="PlayerStates"]
+script = ExtResource( 16 )
+weapon_slot = 1
+
+[node name="DashPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource( 17 )
+dash_module_path = NodePath("../../ModularSkills/Dash")
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource( 19 )
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="RollPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource( 21 )
+dodge_module_path = NodePath("../../ModularSkills/C_Dodge")
+
+[node name="RunPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource( 22 )
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="HealthFlaskState" parent="PlayerStates" instance=ExtResource( 18 )]
+health_path = NodePath("../../ModularSkills/BaseHealth")
+healing_path = NodePath("../../ModularSkills/Healing")
+
+[node name="KnockBackPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource( 25 )
+knockbapck_component_path = NodePath("../../ModularSkills/Knockback")
+
+[node name="RemoteRangedState" type="Node" parent="PlayerStates"]
+script = ExtResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_process_mode = 2
+method_call_mode = 1
+anims/Idle = SubResource( 4 )
+anims/RESET = SubResource( 7 )
+anims/Roll = SubResource( 9 )
+anims/Run = SubResource( 8 )
+script = ExtResource( 23 )
+
+[node name="NodeInterpolater" type="Node2D" parent="."]
+script = ExtResource( 20 )
+
+[node name="TemplateGUI" type="Node2D" parent="NodeInterpolater"]
+
+[node name="OverwatchHealth" parent="NodeInterpolater/TemplateGUI" instance=ExtResource( 26 )]
+material = SubResource( 10 )
+position = Vector2( 0.999998, -28 )
+scale = Vector2( 0.484375, 0.0859375 )
+
+[node name="SpriteContainer" parent="NodeInterpolater" instance=ExtResource( 3 )]
+script = ExtResource( 4 )
+
+[node name="Roll" type="Sprite2D" parent="NodeInterpolater/SpriteContainer"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 24 )
+hframes = 10
+
+[node name="StaminaVisualizer" type="Node2D" parent="NodeInterpolater"]
+visible = false
+
+[editable path="NodeInterpolater/SpriteContainer"]

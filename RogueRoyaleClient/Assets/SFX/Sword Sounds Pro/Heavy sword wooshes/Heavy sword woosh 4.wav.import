@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1s24ky2wg8cj"
+path="res://.godot/imported/Heavy sword woosh 4.wav-2421b113f395d7880ff28d895e11dbb9.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Heavy sword wooshes/Heavy sword woosh 4.wav"
+dest_files=["res://.godot/imported/Heavy sword woosh 4.wav-2421b113f395d7880ff28d895e11dbb9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

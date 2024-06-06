@@ -1,0 +1,71 @@
+[gd_scene load_steps=11 format=3 uid="uid://csakmwsbisvgw"]
+
+[ext_resource type="PackedScene" path="res://Scenes/Map/CollisionTextures/DiagonalCollisions.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Map/DungeonRooms/RoomScenes/PlayTest/SpawnRooms/PlayTestRoom.gd" id="2"]
+[ext_resource type="Texture2D" uid="uid://3e2vtd3nfo2c" path="res://Scenes/Map/CollisionTextures/DiagonalCollisions.png" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/DungeonDoors/TileDoor/S_TileDoor.tscn" id="4"]
+[ext_resource type="Script" path="res://Scenes/Map/DungeonRooms/RoomDoorController.gd" id="5"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/DungeonRooms/RoomMobSpawner/RoomMobSpawner.tscn" id="6"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4yjul"]
+texture = ExtResource("3")
+
+[sub_resource type="TileSet" id="48"]
+sources/0 = SubResource("TileSetAtlasSource_4yjul")
+
+[sub_resource type="RectangleShape2D" id="49"]
+size = Vector2(1920, 1920)
+
+[sub_resource type="RectangleShape2D" id="50"]
+size = Vector2(2688, 2688)
+
+[node name="FirstFloorSpawn" type="Node2D"]
+script = ExtResource("2")
+width_and_height_tiles = Vector2(30, 30)
+border_size_tiles = 6
+
+[node name="RoomTiles" type="Node2D" parent="."]
+
+[node name="BorderTiles" type="Node2D" parent="."]
+
+[node name="DiagonalCollisions" parent="BorderTiles" instance=ExtResource("1")]
+tile_set = SubResource("48")
+format = 2
+
+[node name="MobAndDoorController" parent="." instance=ExtResource("6")]
+
+[node name="RoomMobSpawner" parent="MobAndDoorController" index="0"]
+door_controller_path = NodePath("../../Doors")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MobAndDoorController/RoomMobSpawner" index="0"]
+visible = false
+position = Vector2(960, 960)
+shape = SubResource("49")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MobAndDoorController/PlayerExitCheck" index="0"]
+visible = false
+position = Vector2(960, 960)
+shape = SubResource("50")
+
+[node name="Doors" type="Node2D" parent="."]
+script = ExtResource("5")
+
+[node name="TopDoor" parent="Doors" instance=ExtResource("4")]
+position = Vector2(832, -256)
+n_tiles = 5
+
+[node name="BottomDoor" parent="Doors" instance=ExtResource("4")]
+position = Vector2(832, 2048)
+n_tiles = 5
+
+[node name="LeftDoor" parent="Doors" instance=ExtResource("4")]
+position = Vector2(-128, 768)
+is_horizontal = false
+n_tiles = 5
+
+[node name="RightDoor" parent="Doors" instance=ExtResource("4")]
+position = Vector2(2048, 768)
+is_horizontal = false
+n_tiles = 5
+
+[editable path="MobAndDoorController"]

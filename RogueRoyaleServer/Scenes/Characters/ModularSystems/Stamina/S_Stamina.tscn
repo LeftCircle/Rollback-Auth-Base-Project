@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbbaw8cgqbhbe"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Stamina/S_Stamina.gd" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/ModularSystems/Stamina/StaminaNode.tscn" id="2_3yqrq"]
+[ext_resource type="Script" path="res://Shared/Resources/Timers/CommandTimer.gd" id="2_joaav"]
+
+[node name="BaseStamina" type="Node"]
+script = ExtResource("1")
+stamina_node = ExtResource("2_3yqrq")
+
+[node name="StaminaRefillDelay" type="Node" parent="."]
+script = ExtResource("2_joaav")
+autostart = true
+self_driven = false
+path_to_node_to_connect_to = NodePath("..")
+
+[node name="StaminaRefillSpeed" type="Node" parent="."]
+script = ExtResource("2_joaav")
+wait_time_sec = 0.2
+autostart = true
+self_driven = false
+path_to_node_to_connect_to = NodePath("..")

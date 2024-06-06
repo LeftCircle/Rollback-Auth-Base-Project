@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Map/DungeonRooms/ProcGen/Noise/SingleTileMapOpenSimplex.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+floor_tiles = [ 0, 1 ]
+wall_tiles = [  ]
+lancunarity = 2.765
+octaves = 6
+period = 21.277
+thresholds = [ Vector2( -1, 0.1 ), Vector2( 0.1, 1 ) ]
+persistence = 0.5

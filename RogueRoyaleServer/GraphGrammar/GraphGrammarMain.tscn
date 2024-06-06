@@ -1,0 +1,100 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://GraphGrammar/GraphGrammarMain.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GrammarRules/RuleViewer/Scenes/RuleViewer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GraphGrammar/StartingConditions/StartingViewer/Scenes/StartingViewer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GraphGrammar/GrammarRules/RuleMaker/GrammarRuleMaker.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GraphGrammar/GraphBuilder/GraphBuilder.tscn" type="PackedScene" id=5]
+[ext_resource path="res://GraphGrammar/StartingConditions/StartingMaker/StartingConditionMaker.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GraphGrammar/GrammarNodes/Resources/GrammarNodeInfoRes.tres" type="Resource" id=8]
+[ext_resource path="res://GraphGrammar/GrammarRules/Resources/GrammarRuleSave.gd" type="Script" id=9]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Resource
+class_name GrammarDoorInfo
+
+@export var door_number : int
+@export var connected_door_number : int
+@export var connected_node_number : int
+@export var position_in_parent : Vector2
+@export var connection_vector : Vector2
+
+"
+
+[sub_resource type="Resource" id=2]
+script = SubResource( 1 )
+door_number = 0
+connected_door_number = 0
+connected_node_number = 0
+position_in_parent = Vector2( 0, 0 )
+connection_vector = Vector2( 0, 0 )
+
+[node name="GraphGrammar" type="Camera2D"]
+script = ExtResource( 1 )
+rule_maker = ExtResource( 4 )
+rule_viewer = ExtResource( 2 )
+start_maker = ExtResource( 6 )
+start_viewer = ExtResource( 3 )
+graph_builder = ExtResource( 5 )
+grammar_rule_save = ExtResource( 9 )
+node_info = ExtResource( 8 )
+door_info = SubResource( 2 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchor_right = 0.5
+offset_left = 452.362
+offset_top = 145.344
+offset_right = 557.362
+offset_bottom = 209.344
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildStart" type="Button" parent="VBoxContainer"]
+offset_right = 147.0
+offset_bottom = 20.0
+text = "Build Start Condition"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewStart" type="Button" parent="VBoxContainer"]
+offset_top = 24.0
+offset_right = 147.0
+offset_bottom = 44.0
+text = "View Start Conditions"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildRule" type="Button" parent="VBoxContainer"]
+offset_top = 48.0
+offset_right = 147.0
+offset_bottom = 68.0
+text = "Build Grammar Rule"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewRule" type="Button" parent="VBoxContainer"]
+offset_top = 72.0
+offset_right = 147.0
+offset_bottom = 92.0
+text = "View Grammar Rules"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BuildGraph" type="Button" parent="VBoxContainer"]
+offset_top = 96.0
+offset_right = 147.0
+offset_bottom = 116.0
+text = "Build Graph"
+
+[node name="ActiveScene" type="Node2D" parent="."]
+
+[connection signal="pressed" from="VBoxContainer/BuildStart" to="." method="_on_BuildStart_pressed"]
+[connection signal="pressed" from="VBoxContainer/ViewStart" to="." method="_on_ViewStart_pressed"]
+[connection signal="pressed" from="VBoxContainer/BuildRule" to="." method="_on_BuildRule_pressed"]
+[connection signal="pressed" from="VBoxContainer/ViewRule" to="." method="_on_ViewRule_pressed"]
+[connection signal="pressed" from="VBoxContainer/BuildGraph" to="." method="_on_BuildGraph_pressed"]

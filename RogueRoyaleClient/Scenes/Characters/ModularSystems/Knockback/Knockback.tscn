@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bfpusk31av1gl"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Knockback/C_Knockback.gd" id="1"]
+
+[node name="C_Knockback" type="Node"]
+script = ExtResource("1")
+is_lag_comp = false

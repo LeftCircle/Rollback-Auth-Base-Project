@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Netcode/Scenes/RollbackAnimation/RollbackAnimationPlayer.gd" type="Script" id=1]
+
+[node name="RollbackAnimationPlayer" type="AnimationPlayer"]
+script = ExtResource( 1 )

@@ -1,0 +1,78 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform int is_corner_tyle : hint_range(0, 1, 1) = 0;
+uniform vec4 corner_tyle_color : source_color = vec4(1);
+
+uniform float dist_to_dot : hint_range(0.0, 1.0, 0.1) = 0.1;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec2 random_point = vec2(0.5, 0.5);
+
+uniform vec2 random_bottom_left = vec2(-0.5, -0.5);
+uniform vec4 bl_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_bottom = vec2(0.5, -0.5);
+uniform vec4 b_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_bottom_right = vec2(1.5, -0.5);
+uniform vec4 br_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_left = vec2(-0.5, 0.5);
+uniform vec4 l_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_right = vec2(1.5, 0.5);
+uniform vec4 r_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top_left = vec2(-0.5, 1.5);
+uniform vec4 tl_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top = vec2(0.5, 1.5);
+uniform vec4 t_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top_right = vec2(1.5, 1.5);
+uniform vec4 tr_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+vec2 random(vec2 uv) {
+	return vec2(fract(sin(dot(uv.xy,
+		vec2(12.9898,78.233))) * 43758.5453123));
+}
+
+void voronoi_color_check(vec2 uv, vec2 rp, inout float min_dist, inout vec4 current_color, vec4 set_color){
+	float test_distance = distance(uv, rp);
+	if (test_distance < min_dist){
+		min_dist = test_distance;
+		current_color = set_color;
+		//current_color = mix(color, set_color, min_dist);
+	}
+}
+
+vec4 voronoi_tilemap(vec2 uv){
+	vec4 return_color = color;
+	float m_dist = 5.0;
+	voronoi_color_check(uv, random_top_left, m_dist, return_color, tl_color);
+	voronoi_color_check(uv, random_top, m_dist, return_color, t_color);
+	voronoi_color_check(uv, random_top_right, m_dist, return_color, tr_color);
+	voronoi_color_check(uv, random_left, m_dist, return_color, l_color);
+	voronoi_color_check(uv, random_point, m_dist, return_color, color);
+	voronoi_color_check(uv, random_right, m_dist, return_color, r_color);
+	voronoi_color_check(uv, random_bottom_left, m_dist, return_color, bl_color);
+	voronoi_color_check(uv, random_bottom, m_dist, return_color, b_color);
+	voronoi_color_check(uv, random_bottom_right, m_dist, return_color, br_color);
+//	if (distance(uv, random_point) < dist_to_dot){
+//		return_color = vec4(1.0);
+//	}
+	return return_color;
+}
+
+void fragment() {
+	vec4 voronoi_tile = voronoi_tilemap(UV);
+//	if (UV.x < 0.05 || UV.x > 0.95 || UV.y < 0.05 || UV.y > 0.95){
+//		COLOR = is_corner_tyle == 1 ? corner_tyle_color : vec4(1);
+//	}else {
+	COLOR = voronoi_tile;
+//	}
+}
+"

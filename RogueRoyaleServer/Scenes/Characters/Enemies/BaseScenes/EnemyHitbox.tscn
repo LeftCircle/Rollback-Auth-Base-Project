@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Characters/Enemies/BaseScenes/EnemyHitbox.gd" type="Script" id=1]
+
+[node name="EnemyHitbox" type="Area2D"]
+collision_layer = 4
+script = ExtResource( 1 )

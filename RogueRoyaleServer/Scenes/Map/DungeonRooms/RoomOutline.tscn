@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomOutline.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomDoorController.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomMobSpawner/RoomMobSpawner.tscn" type="PackedScene" id=3]
+
+[node name="RoomOutline" type="Node2D"]
+script = ExtResource( 1 )
+border_size_tiles = 1
+
+[node name="RoomTiles" type="Node2D" parent="."]
+
+[node name="BorderTiles" type="Node2D" parent="."]
+
+[node name="RoomMobSpawner" parent="." instance=ExtResource( 3 )]
+
+[node name="Doors" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[editable path="RoomMobSpawner"]

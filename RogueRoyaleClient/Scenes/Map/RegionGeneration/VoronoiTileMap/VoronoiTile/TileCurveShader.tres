@@ -1,0 +1,84 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform int corner_type : hint_range(0, 3, 1) = 1;
+uniform float random_freq_0 : hint_range(0.0, 500.0, 0.1) = 70;
+uniform float random_seed : hint_range(0.0, 1000.0, 0.00001) = 1.0;
+
+
+uniform float PI = 3.14159;
+
+// a function to see if a point is inside a circle
+bool is_inside_circle(vec2 point, vec2 circle_center, float circle_radius){
+    return distance(point, circle_center) < circle_radius;
+}
+
+// a function to determine where the center of the circle should be based on corner type
+// a corner type of 0 is bottom left, 1 is bottom right, 2 is top right, 3 is top left
+vec2 get_circle_center(){
+    vec2 center = vec2(0, 0);
+    if(corner_type == 0){
+        center = vec2(0, 0);
+    } else if(corner_type == 1){
+        center = vec2(1, 0);
+    } else if(corner_type == 2){
+        center = vec2(1, 1);
+    } else if(corner_type == 3){
+        center = vec2(0, 1);
+    }
+    return center;
+}
+
+// a function to return the polar coordinates of a point from a given center
+vec2 get_polar_coords(vec2 point, vec2 center){
+    vec2 polar_coords = vec2(0, 0);
+    polar_coords.x = distance(point, center);
+    polar_coords.y = atan(point.y - center.y, point.x - center.x);
+    return polar_coords;
+}
+
+// a function that gives a random float between 0 and 1
+float rand(vec2 uv){
+    return fract(sin(dot(uv, vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+// a function that returns a random vec2 between 0 and 1
+vec2 rand_vec2(vec2 uv){
+    return vec2(rand(uv), rand(uv));
+}
+
+
+// a function that modifies a polar coordinate based on its radius
+void apply_sin_wave_to_polar_coords(inout vec2 polar_coords, float amp, float freq, inout float rand_mod){
+    float new_rand_mod = rand(vec2(rand_mod, rand_mod));
+	polar_coords.x += rand_mod * amp * sin(polar_coords.y / (2.0 * PI) * new_rand_mod * freq);
+	rand_mod = new_rand_mod;
+}
+
+// a function that returns a smooth curve from 0 to 1
+float smooth_curve(float x){
+    return x * x * (3.0 - 2.0 * x);
+}
+
+
+void fragment(){
+    vec2 center = get_circle_center();
+    vec2 uv = UV;
+    float radius = 1.0;
+    vec2 polar = get_polar_coords(uv, center);
+	float randf = rand(vec2(random_seed, random_seed));
+    apply_sin_wave_to_polar_coords(polar, 0.03, 70, randf);
+    apply_sin_wave_to_polar_coords(polar, 0.04, 78, randf);
+	apply_sin_wave_to_polar_coords(polar, 0.08, 20, randf);
+	apply_sin_wave_to_polar_coords(polar, 0.05, 7.63, randf);
+	apply_sin_wave_to_polar_coords(polar, 0.01, 200.63, randf);
+	apply_sin_wave_to_polar_coords(polar, 0.01, 200.63, randf);
+    uv = polar.x * vec2(cos(polar.y), sin(polar.y)) + center;
+    if(is_inside_circle(uv, center, radius)){
+        COLOR = vec4(1, 1, 1, 1);
+    } else {
+        COLOR = vec4(0, 0, 0, 1);
+    }
+}"

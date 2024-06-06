@@ -1,0 +1,274 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/GUI/Menus/Login.gd" type="Script" id=1]
+
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(.6, .6, .6, .8);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(.6, .6, .6, .8);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+
+[sub_resource type="Shader" id=5]
+code = "shader_type canvas_item;
+
+void fragment() {
+	COLOR = vec4(1.0, 0.0, 0.0, 0.75);
+}"
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = SubResource( 5 )
+
+[node name="LoginScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.70605e-05
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="NinePatchRect" parent="."]
+material = SubResource( 2 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoginScreen" type="VBoxContainer" parent="Background"]
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 35.0
+offset_right = -35.0
+offset_bottom = -35.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Background/LoginScreen"]
+offset_right = 330.0
+offset_bottom = 14.0
+text = "Login Screen"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/LoginScreen"]
+offset_top = 18.0
+offset_right = 330.0
+offset_bottom = 63.0
+custom_minimum_size = Vector2( 0, 45 )
+
+[node name="UsernameTitle" type="Label" parent="Background/LoginScreen"]
+offset_top = 67.0
+offset_right = 330.0
+offset_bottom = 81.0
+text = "Username"
+
+[node name="Username" type="LineEdit" parent="Background/LoginScreen"]
+offset_top = 85.0
+offset_right = 330.0
+offset_bottom = 109.0
+
+[node name="PasswordTitle" type="Label" parent="Background/LoginScreen"]
+offset_top = 113.0
+offset_right = 330.0
+offset_bottom = 127.0
+text = "Password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password" type="LineEdit" parent="Background/LoginScreen"]
+offset_top = 131.0
+offset_right = 330.0
+offset_bottom = 155.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/LoginScreen"]
+offset_top = 159.0
+offset_right = 330.0
+offset_bottom = 189.0
+custom_minimum_size = Vector2( 0, 30 )
+
+[node name="LoginButton" type="TextureButton" parent="Background/LoginScreen"]
+material = SubResource( 6 )
+offset_left = 115.0
+offset_top = 193.0
+offset_right = 215.0
+offset_bottom = 223.0
+custom_minimum_size = Vector2( 100, 30 )
+size_flags_horizontal = 4
+
+[node name="LoginLabel" type="Label" parent="Background/LoginScreen/LoginButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Login"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreateAccountButton" type="TextureButton" parent="Background/LoginScreen"]
+material = SubResource( 6 )
+offset_left = 115.0
+offset_top = 227.0
+offset_right = 215.0
+offset_bottom = 257.0
+custom_minimum_size = Vector2( 100, 30 )
+size_flags_horizontal = 4
+
+[node name="CreateAccountLabel" type="Label" parent="Background/LoginScreen/CreateAccountButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Create Account"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CreateAccount" type="VBoxContainer" parent="Background"]
+visible = false
+material = SubResource( 4 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = 35.0
+offset_right = -35.0
+offset_bottom = -35.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="Background/CreateAccount"]
+offset_right = 330.0
+offset_bottom = 14.0
+text = "Create An Account"
+align = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Background/CreateAccount"]
+offset_top = 18.0
+offset_right = 330.0
+offset_bottom = 48.0
+custom_minimum_size = Vector2( 0, 30 )
+
+[node name="EmailAddressTitle" type="Label" parent="Background/CreateAccount"]
+offset_top = 52.0
+offset_right = 330.0
+offset_bottom = 66.0
+text = "Email Address"
+
+[node name="EmailAddress" type="LineEdit" parent="Background/CreateAccount"]
+offset_top = 70.0
+offset_right = 330.0
+offset_bottom = 94.0
+
+[node name="UsernameTitle" type="Label" parent="Background/CreateAccount"]
+offset_top = 98.0
+offset_right = 330.0
+offset_bottom = 112.0
+text = "Username"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Username" type="LineEdit" parent="Background/CreateAccount"]
+offset_top = 116.0
+offset_right = 330.0
+offset_bottom = 140.0
+
+[node name="PasswordTitle" type="Label" parent="Background/CreateAccount"]
+offset_top = 144.0
+offset_right = 330.0
+offset_bottom = 158.0
+text = "Password"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Password" type="LineEdit" parent="Background/CreateAccount"]
+offset_top = 162.0
+offset_right = 330.0
+offset_bottom = 186.0
+
+[node name="ConfirmPasswordTitle" type="Label" parent="Background/CreateAccount"]
+offset_top = 190.0
+offset_right = 330.0
+offset_bottom = 204.0
+text = "Confirm Password"
+
+[node name="ConfirmPassword" type="LineEdit" parent="Background/CreateAccount"]
+offset_top = 208.0
+offset_right = 330.0
+offset_bottom = 232.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="Background/CreateAccount"]
+offset_top = 236.0
+offset_right = 330.0
+offset_bottom = 266.0
+custom_minimum_size = Vector2( 0, 30 )
+
+[node name="ConfirmButton" type="TextureButton" parent="Background/CreateAccount"]
+material = SubResource( 6 )
+offset_left = 115.0
+offset_top = 270.0
+offset_right = 215.0
+offset_bottom = 300.0
+custom_minimum_size = Vector2( 100, 30 )
+size_flags_horizontal = 4
+
+[node name="ConfirmLabel" type="Label" parent="Background/CreateAccount/ConfirmButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Confirm"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BackButton" type="TextureButton" parent="Background/CreateAccount"]
+material = SubResource( 6 )
+offset_left = 115.0
+offset_top = 304.0
+offset_right = 215.0
+offset_bottom = 334.0
+custom_minimum_size = Vector2( 100, 30 )
+size_flags_horizontal = 4
+
+[node name="BackLabel" type="Label" parent="Background/CreateAccount/BackButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="Background/LoginScreen/LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="Background/LoginScreen/CreateAccountButton" to="." method="_on_CreateAccountButton_pressed"]
+[connection signal="pressed" from="Background/CreateAccount/ConfirmButton" to="." method="_on_ConfirmButton_pressed"]
+[connection signal="pressed" from="Background/CreateAccount/BackButton" to="." method="_on_BackButton_pressed"]

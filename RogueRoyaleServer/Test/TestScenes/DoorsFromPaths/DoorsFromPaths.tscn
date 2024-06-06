@@ -1,0 +1,23 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Test/TestScenes/DoorsFromPaths/TESTLoadedNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/ServerCharacter/BasicPlayer.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GraphGrammar/Springs/Scenes/Spring.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Test/TestScenes/DoorsFromPaths/SpringTest.gd" type="Script" id=4]
+[ext_resource path="res://Test/TestScenes/DoorsFromPaths/DoorsFromPaths.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Map/DungeonDoors/Scenes/DoorPlacerFromSprings.tscn" type="PackedScene" id=6]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 5 )
+straight_path_scene = ExtResource( 6 )
+
+[node name="Spring" parent="." instance=ExtResource( 3 )]
+script = ExtResource( 4 )
+
+[node name="LoadedNode" parent="." instance=ExtResource( 1 )]
+position = Vector2( -4466.06, 2373.04 )
+
+[node name="LoadedNode2" parent="." instance=ExtResource( 1 )]
+position = Vector2( 4444.71, -3803.98 )
+
+[node name="BasicPlayer" parent="." instance=ExtResource( 2 )]

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Textures/FirstFloor/TreesRocksAndFence.png" type="Texture2D" id=1]
+[ext_resource path="res://Textures/FirstFloor/Tree.gd" type="Script" id=2]
+
+[node name="Tree" type="Sprite2D"]
+position = Vector2( 0, -33 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 1
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 6
+frame = 3
+script = ExtResource( 2 )

@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Map/DungeonDoors/DoorBorder.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Map/DungeonDoors/NormalDoors/BasicDoor.tscn" type="PackedScene" id=2]
+
+[node name="DoorBorder" type="Node2D"]
+position = Vector2( 192, -1664 )
+script = ExtResource( 1 )
+door_width = 8
+door_search_distance = 7
+door_side = 1
+
+[node name="DoorTileMap" parent="." instance=ExtResource( 2 )]

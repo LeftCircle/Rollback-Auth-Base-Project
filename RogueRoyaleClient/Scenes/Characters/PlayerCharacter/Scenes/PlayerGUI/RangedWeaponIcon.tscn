@@ -1,0 +1,8 @@
+[gd_scene format=2]
+
+[node name="RangedWeaponIcon" type="TextureRect"]
+offset_right = 32.0
+offset_bottom = 32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

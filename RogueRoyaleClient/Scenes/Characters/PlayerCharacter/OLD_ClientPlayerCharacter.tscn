@@ -1,0 +1,575 @@
+[gd_scene load_steps=38 format=3 uid="uid://c3n4j8h8cjk4c"]
+
+[ext_resource type="PackedScene" uid="uid://bxew6yunhkqui" path="res://Scenes/Characters/ModularSystems/Move/Move.tscn" id="1"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/ClientCamera2D.gd" id="2"]
+[ext_resource type="PackedScene" uid="uid://c8jdl6oavk7lc" path="res://Scenes/Weapons/MeleeWeapons/Primary/Dagger/C_DaggerSimple.tscn" id="3"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/ComponentMap/ComponentMap.gd" id="4"]
+[ext_resource type="PackedScene" uid="uid://4mnseyhx655t" path="res://Scenes/Weapons/RangeWeapons/StarterPistol/C_StarterPistol.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://b5wepumyknukx" path="res://Scenes/Weapons/MeleeWeapons/Secondary/Shields/StarterShield/C_StarterShieldAnimationTree.tscn" id="7"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Dash/C_Dash.gd" id="8"]
+[ext_resource type="Script" path="res://Scenes/Characters/BaseScenes/BaseHurtboxRollback.gd" id="10"]
+[ext_resource type="PackedScene" uid="uid://duesg7c5b2581" path="res://Scenes/Characters/ModularSystems/Ammo/AmmoBase.tscn" id="11"]
+[ext_resource type="PackedScene" uid="uid://d376ipkw6k2su" path="res://Scenes/Characters/ModularSystems/Stamina/C_Stamina.tscn" id="12"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/ModularSystems/Health/BaseHealth.tscn" id="13"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/ModularSystems/Health/Healing.tscn" id="14"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/PlayerStateManager.gd" id="15"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/ClientStates/C_AttackState.gd" id="16"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/DashPlayerState.gd" id="17"]
+[ext_resource type="PackedScene" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/HealthFlaskState.tscn" id="18"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/IdleState.gd" id="19"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/ClientStates/C_RangeWeaponState.gd" id="20"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/ClientStates/C_RollState.gd" id="21"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/RunState.gd" id="22"]
+[ext_resource type="Script" path="res://Netcode/Scenes/RollbackAnimation/RollbackAnimationPlayer.gd" id="23"]
+[ext_resource type="PackedScene" uid="uid://dqatr2dtksicx" path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/PlayerGUI.tscn" id="25"]
+[ext_resource type="Script" path="res://Scenes/Characters/BaseResources/MissPredictSmoother.gd" id="26"]
+[ext_resource type="Script" path="res://Scenes/Characters/PlayerCharacter/Scenes/States/KnockBackState.gd" id="27"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Dodge/C_Dodge.gd" id="28"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Knockback/C_Knockback.gd" id="29"]
+[ext_resource type="Texture2D" uid="uid://b84tslbm115uc" path="res://Assets/SimpleArt/Player/SquarePlayer.png" id="30"]
+[ext_resource type="Script" path="res://Scenes/Characters/BaseResources/DampedSpringSmoother.gd" id="31"]
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/InputQueue/C_InputQueue.gd" id="32"]
+
+[sub_resource type="RectangleShape2D" id="1"]
+resource_local_to_scene = true
+size = Vector2(13, 6)
+
+[sub_resource type="RectangleShape2D" id="11"]
+size = Vector2(23, 23)
+
+[sub_resource type="Animation" id="10"]
+resource_name = "Hurt"
+length = 0.2
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NodeInterpolater/Sprite2D:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodeInterpolater/Sprite2D:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NodeInterpolater/Sprite2D:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NodeInterpolater/Sprite2D:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NodeInterpolater/Sprite2D:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NodeInterpolater/Sprite2D:self_modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.403922, 0.403922, 1), Color(1, 0.403922, 0.403922, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="4"]
+resource_name = "Idle"
+length = 1.5
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NodeInterpolater/Sprite2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodeInterpolater/Sprite2D:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NodeInterpolater/Sprite2D:scale:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NodeInterpolater/Sprite2D:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NodeInterpolater/Sprite2D:self_modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerHurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodeInterpolater/Sprite2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NodeInterpolater/Sprite2D:scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NodeInterpolater/Sprite2D:scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NodeInterpolater/Sprite2D:position:x")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("NodeInterpolater/Sprite2D:position:y")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("NodeInterpolater/Sprite2D:self_modulate:r")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("NodeInterpolater/Sprite2D:self_modulate:g")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/8/type = "bezier"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("NodeInterpolater/Sprite2D:self_modulate:b")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/9/type = "bezier"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("NodeInterpolater/Sprite2D:self_modulate:a")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("NodeInterpolater/Sprite2D:self_modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("NodeInterpolater/Sprite2D:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("NodeInterpolater/Sprite2D:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 22)]
+}
+
+[sub_resource type="Animation" id="9"]
+resource_name = "Roll"
+length = 0.9
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerHurtbox/CollisionShape2D:disabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.183334, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodeInterpolater/Sprite2D:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NodeInterpolater/Sprite2D:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NodeInterpolater/Sprite2D:scale:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("NodeInterpolater/Sprite2D:scale:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+
+[sub_resource type="Animation" id="8"]
+resource_name = "Run"
+step = 0.0166667
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("NodeInterpolater/Sprite2D:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("NodeInterpolater/Sprite2D:scale:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("NodeInterpolater/Sprite2D:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(),
+"points": PackedFloat32Array(),
+"times": PackedFloat32Array()
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("NodeInterpolater/Sprite2D:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_spke7"]
+_data = {
+"Hurt": SubResource("10"),
+"Idle": SubResource("4"),
+"RESET": SubResource("7"),
+"Roll": SubResource("9"),
+"Run": SubResource("8")
+}
+
+[node name="ClientPlayerCharacter" type="CharacterBody2D"]
+collision_layer = 512
+
+[node name="WorldCollisions" type="CollisionShape2D" parent="."]
+position = Vector2(-2.38419e-07, 17)
+shape = SubResource("1")
+
+[node name="PlayerHurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 10
+script = ExtResource("10")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHurtbox"]
+shape = SubResource("11")
+
+[node name="Components" type="Node2D" parent="."]
+script = ExtResource("4")
+
+[node name="Dash" type="Node" parent="Components"]
+script = ExtResource("8")
+starting_dash_seconds = 0.15
+animation_player_path = NodePath("../../AnimationPlayer")
+stamina_path = NodePath("../ClientStamina")
+is_lag_comp = false
+
+[node name="AmmoBase" parent="Components" instance=ExtResource("11")]
+ammo_to_refill_on_hit = 3
+is_lag_comp = false
+
+[node name="ClientStamina" parent="Components" instance=ExtResource("12")]
+is_lag_comp = false
+
+[node name="BaseHealth" parent="Components" instance=ExtResource("13")]
+health_segments = 3
+shield_segments = 4
+
+[node name="Healing" parent="Components" instance=ExtResource("14")]
+health_component_path = NodePath("../BaseHealth")
+is_lag_comp = false
+
+[node name="StarterShield" parent="Components" instance=ExtResource("7")]
+is_lag_comp = false
+
+[node name="Pistol" parent="Components" instance=ExtResource("6")]
+visible = false
+ammo = 6
+is_lag_comp = false
+
+[node name="C_Dodge" type="Node" parent="Components"]
+script = ExtResource("28")
+animation_path = NodePath("../../AnimationPlayer")
+stamina_path = NodePath("../ClientStamina")
+stamina_cost = 1
+is_lag_comp = false
+
+[node name="Knockback" type="Node" parent="Components"]
+script = ExtResource("29")
+animation_path = NodePath("../../AnimationPlayer")
+is_lag_comp = false
+
+[node name="InputQueue" type="Node" parent="Components"]
+script = ExtResource("32")
+to_log = true
+is_lag_comp = false
+
+[node name="Dagger" parent="Components" instance=ExtResource("3")]
+is_lag_comp = false
+
+[node name="Move" parent="Components" instance=ExtResource("1")]
+max_speed = 200
+
+[node name="PlayerStates" type="Node" parent="."]
+script = ExtResource("15")
+entity_path = NodePath("..")
+animation_path = NodePath("../AnimationPlayer")
+state_group_name = "PlayerState"
+
+[node name="AttackPrimaryState" type="Node" parent="PlayerStates"]
+script = ExtResource("16")
+
+[node name="AttackSecondaryState" type="Node" parent="PlayerStates"]
+script = ExtResource("16")
+
+[node name="DashPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource("17")
+
+[node name="IdlePlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource("19")
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="RangeWeaponState" type="Node" parent="PlayerStates"]
+script = ExtResource("20")
+
+[node name="RollPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource("21")
+
+[node name="RunPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource("22")
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="HealthFlaskState" parent="PlayerStates" instance=ExtResource("18")]
+
+[node name="KnockBackPlayerState" type="Node" parent="PlayerStates"]
+script = ExtResource("27")
+knockbapck_component_path = NodePath("../../Components/Knockback")
+animation_path = NodePath("../../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+method_call_mode = 1
+libraries = {
+"": SubResource("AnimationLibrary_spke7")
+}
+script = ExtResource("23")
+to_log = true
+
+[node name="PlayerGUI" parent="." instance=ExtResource("25")]
+
+[node name="NodeInterpolater" type="Node2D" parent="."]
+script = ExtResource("26")
+to_buffer = true
+
+[node name="Sprite2D" type="Sprite2D" parent="NodeInterpolater"]
+position = Vector2(0, 22)
+texture = ExtResource("30")
+offset = Vector2(0, -23)
+
+[node name="CameraSmoother" type="Node2D" parent="."]
+script = ExtResource("31")
+angular_freq = 20.0
+
+[node name="Camera2D" type="Camera2D" parent="CameraSmoother"]
+script = ExtResource("2")

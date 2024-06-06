@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://1jfvnqhv4iew"]
+
+[ext_resource type="Script" path="res://Scenes/Characters/ModularSystems/Dodge/AnimationDrivenDodge.gd" id="1_8whns"]
+
+[node name="ANimationDrivenDodge" type="Node"]
+script = ExtResource("1_8whns")

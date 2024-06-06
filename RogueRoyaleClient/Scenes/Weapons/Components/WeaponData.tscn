@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Weapons/Components/WeaponData.gd" type="Script" id=1]
+
+[node name="WeaponData" type="Node"]
+script = ExtResource( 1 )

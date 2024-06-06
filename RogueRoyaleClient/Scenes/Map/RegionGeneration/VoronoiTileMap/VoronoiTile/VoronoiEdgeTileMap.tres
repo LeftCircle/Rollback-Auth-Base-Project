@@ -1,0 +1,229 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform int is_corner_tyle : hint_range(0, 1, 1) = 0;
+uniform vec4 corner_tyle_color : source_color = vec4(1);
+
+uniform float dist_to_dot : hint_range(0.0, 1.0, 0.1) = 0.1;
+
+uniform vec4 color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec2 random_point = vec2(0.5, 0.5);
+
+uniform vec2 random_bottom_left = vec2(-0.5, -0.5);
+uniform vec4 bl_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_bottom = vec2(0.5, -0.5);
+uniform vec4 b_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_bottom_right = vec2(1.5, -0.5);
+uniform vec4 br_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_left = vec2(-0.5, 0.5);
+uniform vec4 l_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_right = vec2(1.5, 0.5);
+uniform vec4 r_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top_left = vec2(-1.5, 1.5);
+uniform vec4 tl_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top = vec2(0.5, 1.5);
+uniform vec4 t_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform vec2 random_top_right = vec2(1.5, 1.5);
+uniform vec4 tr_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+// a function that gives a random float between 0 and 1
+float rand(ivec2 uv){
+    return fract(sin(dot(vec2(uv), vec2(12.9898, 78.233))) * 43758.5453);
+}
+
+// a function that returns a random vec2 between 0 and 1
+vec2 rand_vec2(ivec2 uv){
+    return vec2(rand(uv), rand(uv));
+}
+
+void reg_voronoi(inout ivec2 mb, inout vec2 mr, inout vec2 res, vec2 f, vec2 rand_point, ivec2 neighb_vec, inout vec4 a_and_b){
+        vec2 r = rand_point - f;
+        float d = dot(r,r);
+        if( d < res.x )
+        {
+            a_and_b.ba = a_and_b.rg;
+            a_and_b.rg = rand_point;
+            res.y = res.x;
+			res.x = d;
+            mr = r;
+            mb = neighb_vec;
+        } else if (d < res.y){
+			res.y = d;
+			a_and_b.ba = rand_point;
+		}
+}
+
+vec2 random_point_from_neighbor(ivec2 neighbor_cell){
+	if (neighbor_cell == ivec2(-1, -1)){
+		return random_bottom_left;
+	} else if (neighbor_cell == ivec2(0, -1)){
+        return random_bottom;
+    } else if (neighbor_cell == ivec2(1, -1)){
+        return random_bottom_right;
+    } else if (neighbor_cell == ivec2(-1, 0)){
+        return random_left;
+    } else if (neighbor_cell == ivec2(1, 0)){
+        return random_right;
+    } else if (neighbor_cell == ivec2(-1, 1)){
+        return random_top_left;
+    } else if (neighbor_cell == ivec2(0, 1)){
+        return random_top;
+    } else if (neighbor_cell == ivec2(1, 1)){
+        return random_top_right;
+    } else {
+        return random_point;
+    }
+}
+
+void distance_to_borders(ivec2 mb, ivec2 p, vec2 f, inout vec2 mr, inout float res, vec2 neighb_vec, inout vec2 other_p){
+	ivec2 b = mb + ivec2(neighb_vec);
+	vec2 rand_point = random_point_from_neighbor(p + b);
+    vec2 r = rand_point - f;
+	float d = dot(0.5*(mr+r), normalize(r-mr));
+    if (d < res)
+        res = d;
+		other_p = rand_point;
+}
+
+float voronoiDistance(in vec2 x, inout vec4 a_and_b, inout vec2 other_p)
+{
+    ivec2 p = ivec2(floor( x ));
+    vec2  f = fract( x );
+	//ivec2 p = ivec2(0, 0);
+	
+
+    //----------------------------------
+    // first pass: regular voronoi
+    //----------------------------------
+
+    ivec2 mb;
+    vec2 mr;
+
+    vec2 res_v = vec2(8.0);
+//	for( int j=-1; j<=1; j++ )
+//    for( int i=-1; i<=1; i++ )
+//    {
+//        ivec2 b = ivec2(i, j);
+//        vec2  r = random_point_from_neighbor(p+b) - f;
+//        float d = dot(r,r);
+//
+//        if( d < res )
+//        {
+//            res = d;
+//            mr = r;
+//            mb = b;
+//        }
+//    }
+    reg_voronoi(mb, mr, res_v, f, random_bottom_left, ivec2(-1, -1), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_bottom, ivec2(0, -1), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_bottom_right, ivec2(1, -1), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_left, ivec2(-1, 0), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_point, ivec2(0, 0), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_right, ivec2(1, 0), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_top_left, ivec2(-1, 1), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_top, ivec2(0, 1), a_and_b);
+    reg_voronoi(mb, mr, res_v, f, random_top_right, ivec2(1, 1), a_and_b);
+    
+    //----------------------------------
+    // second pass: distance to borders
+    //----------------------------------
+
+    float res = 8.0;
+//	for( int j=-2; j<=2; j++ )
+//    for( int i=-2; i<=2; i++ )
+//    {
+//        ivec2 b = mb + ivec2(i, j);
+//        vec2  r = random_point_from_neighbor(p+b) - f;
+//        float d = dot(0.5*(mr+r), normalize(r-mr));
+//
+//        res = min( res, d );
+//    }
+//    return res;
+	distance_to_borders(mb, p, f, mr, res, vec2(-1, -1), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(0, -1), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(1, -1), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(-1, 0), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(0, 0), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(1, 0), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(-1, 1), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(0, 1), other_p);
+    distance_to_borders(mb, p, f, mr, res, vec2(1, 1), other_p);
+    
+    return res;
+}
+
+//float getBorder( in vec2 p )
+//{
+//	vec2 a, b;
+//    float d = voronoiDistance(p, a, b);
+//    return 1.0 - smoothstep(0.0,0.05,d);
+//}
+
+void voronoi_color_check(vec2 uv, vec2 rp, inout float min_dist, inout vec4 current_color, vec4 set_color){
+	float test_distance = distance(uv, rp);
+	if (test_distance < min_dist){
+		min_dist = test_distance;
+		current_color = set_color;
+	}
+}
+
+vec3 get_border_colors(vec2 uv){
+	vec4 return_color = color;
+	float m_dist = 5.0;
+	voronoi_color_check(uv, random_top_left, m_dist, return_color, tl_color);
+	voronoi_color_check(uv, random_top, m_dist, return_color, t_color);
+	voronoi_color_check(uv, random_top_right, m_dist, return_color, tr_color);
+	voronoi_color_check(uv, random_left, m_dist, return_color, l_color);
+	voronoi_color_check(uv, random_point, m_dist, return_color, color);
+	voronoi_color_check(uv, random_right, m_dist, return_color, r_color);
+	voronoi_color_check(uv, random_bottom_left, m_dist, return_color, bl_color);
+	voronoi_color_check(uv, random_bottom, m_dist, return_color, b_color);
+	voronoi_color_check(uv, random_bottom_right, m_dist, return_color, br_color);
+	return vec3(return_color.x, return_color.y, return_color.z);
+}
+
+void fragment(){
+	//COLOR = vec4(vec3(getBorder(UV)), 1.0);
+	// a is the closest point to the pixel, and b is the second closest
+    vec4 a_and_b;
+    vec2 other_p;
+    float vd = voronoiDistance(UV, a_and_b, other_p);
+    //vd += 3.0 * sin(60.556 * (UV.x));
+	vec3 c = vec3(vd);
+	// isolines
+    //vec3 col = c.x*(0.5 + 0.5*sin(64.0*c.x))*vec3(1.0);
+    vec3 col = get_border_colors(UV);
+	vec3 acol = get_border_colors(a_and_b.rg);
+	vec3 bcol = get_border_colors(a_and_b.ba);
+	vec3 ccol = get_border_colors(other_p);
+    if (acol != bcol){//(length(col - bcol) > 0.01){
+	    // OG YELLOW BORDERS
+		float dd = length( c.yz );
+//		col = mix( vec3(1.0,0.6,0.0), col, smoothstep( 0.04, 0.07, c.x ) );
+//		// feature points
+		//col = mix( vec3(1.0,0.6,0.1), col, smoothstep( 0.0, 0.12, dd) );
+		//col += vec3(1.0,0.6,0.1)*(1.0-smoothstep( 0.0, 0.04, dd));
+		// TESTING
+		//float dd = length( c.yz );
+		// Creates a cool triangle pattern
+		//col = mix(acol, bcol, smoothstep(0.04, 0.07, c.x));
+		
+		//col = mix(bcol, acol, smoothstep(0.04, 0.07, c.x));
+		
+		// Mostly smooth transitions
+		vec3 mix_col = mix(acol, bcol, 0.5);
+		col = mix(mix_col, col, smoothstep( 0.0, 0.12, dd) );
+		col += mix_col * (1.0 - smoothstep(0.0, 0.04, dd));
+	}
+	COLOR = vec4(col, 1.0);
+}
+"

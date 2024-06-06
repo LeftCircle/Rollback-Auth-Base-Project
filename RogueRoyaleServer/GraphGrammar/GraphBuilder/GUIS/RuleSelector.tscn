@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://GraphGrammar/GraphBuilder/GUIS/RuleSelector.gd" type="Script" id=1]
+[ext_resource path="res://GraphGrammar/GraphBuilder/GUIS/RuleSelection.tscn" type="PackedScene" id=2]
+
+[node name="RuleSelector" type="GridContainer"]
+offset_right = 380.0
+offset_bottom = 235.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+rule_selection_template = ExtResource( 2 )
+
+[node name="AddRuleButton" type="Button" parent="."]
+offset_right = 69.0
+offset_bottom = 20.0
+text = "Add Rule"
+
+[connection signal="pressed" from="AddRuleButton" to="." method="_on_AddRuleButton_pressed"]

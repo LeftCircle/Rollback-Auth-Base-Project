@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomMobSpawner/RoomMobSpawner.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomMobSpawner/PlayerExitCheck.gd" type="Script" id=2]
+
+[node name="MobAndDoorController" type="Node2D"]
+
+[node name="RoomMobSpawner" type="Area2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource( 1 )
+
+[node name="PlayerExitCheck" type="Area2D" parent="."]
+script = ExtResource( 2 )

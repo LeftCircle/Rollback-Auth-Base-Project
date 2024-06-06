@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dvn70setbj3rm"
+path="res://.godot/imported/Club 3.wav-5aa1477c0c720fe28864747679503024.sample"
+
+[deps]
+
+source_file="res://Assets/SFX/Sword Sounds Pro/Non cutting weapon club_staff/Club/Club 3.wav"
+dest_files=["res://.godot/imported/Club 3.wav-5aa1477c0c720fe28864747679503024.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

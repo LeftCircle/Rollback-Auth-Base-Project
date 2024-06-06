@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Singletons/ObjectSerialization/ObjectCreationRegistry.gd" type="Script" id=1]
+[ext_resource path="res://Resources/FileLister.gd" type="Script" id=3]
+
+[sub_resource type="Resource" id=1]
+resource_local_to_scene = true
+script = ExtResource( 3 )
+folder_path = "res://Scenes"
+file_ending = ".tscn"
+with_sub_folders = true
+create_list_of_folders = false
+
+[sub_resource type="Resource" id=2]
+script = ExtResource( 3 )
+folder_path = "res://Assets/Synced"
+file_ending = ".tres"
+with_sub_folders = true
+create_list_of_folders = false
+
+[node name="ObjectCreationRegistry" type="Node"]
+script = ExtResource( 1 )
+file_lister = SubResource( 1 )
+synced_fx_file_lister = SubResource( 2 )

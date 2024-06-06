@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bi8fwso57ci6a"]
+
+[ext_resource type="PackedScene" uid="uid://bcfgc5mfcmb1p" path="res://Tests/01_TestScenes/Animations/LocalRollbackStateMachineTest.tscn" id="1_5ifg0"]
+
+[node name="TestLocalRollbackAnimationTree" type="Node2D"]
+
+[node name="LocalRollbackStateMachineTest" parent="." instance=ExtResource("1_5ifg0")]
+position = Vector2(407, 269)

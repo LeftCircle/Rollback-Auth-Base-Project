@@ -1,0 +1,33 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+# Godot 4+ specific ignores
+RogueRoyaleClient/.godot/
+RogueRoyaleServer/.godot/
+GatewayServer/.godot/
+AuthenticationServer/.godot/
+
+# Godot-specific ignores
+#RogueRoyaleClient/.import/
+#RogueRoyaleServer/.import/
+GatewayServer/.import/
+AuthenticationServer/.import/
+RogueRoyaleClient/export.cfg
+RogueRoyaleServer/export.cfg
+GatewayServer/export.cfg
+AuthenticationServer/export.cfg
+RogueRoyaleClient/export_presets.cfg
+RogueRoyaleServer/export_presets.cfg
+GatewayServer/export_presets.cfg
+AuthenticationServer/export_presets.cfg
+
+# Imported translations (automatically generated from CSV files)
+*.translation
+
+# Gut
+RogueRoyaleClient/.gut_editor_config.json
+RogueRoyaleServer/.gut_editor_config.json
+#*.import
+#*.import

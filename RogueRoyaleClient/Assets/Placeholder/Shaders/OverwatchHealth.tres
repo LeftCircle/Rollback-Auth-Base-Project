@@ -1,0 +1,73 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+//uniform float current_health : hint_range(0.0, 1.0) = 1.0;
+uniform float health_segments : hint_range(0.0, 100.0) = 5;
+uniform float armor_segments : hint_range(0.0, 100.0) = 1;
+uniform float shield_segments : hint_range(0.0, 100.0) = 1;
+uniform float health_percent : hint_range(0.0, 1.0) = 1.0;
+uniform float shield_percent : hint_range(0.0, 1.0) = 1.0;
+uniform float armor_percent : hint_range(0.0, 1.0) = 1.0;
+
+uniform vec4 background_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 health_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 armor_color : source_color = vec4(1.0, 1.0, 0.0, 1.0);
+uniform vec4 shield_color : source_color = vec4(0.0, 0.0, 1.0, 1.0);
+uniform vec4 no_health : source_color = vec4(1.0, 1.0, 1.0, 0.5);
+uniform vec4 outline_color = vec4(1.0);
+varying float num_lines;
+varying vec2 tiled_uv;
+varying vec2 health_range;
+varying vec2 armor_range;
+varying vec2 shield_range;
+varying float current_health;
+varying float square_width;
+
+
+// getting the segments in vertex for effeciency
+void vertex(){
+	num_lines = health_segments + armor_segments + shield_segments;
+	current_health = (health_percent * health_segments + armor_percent * armor_segments + shield_percent * shield_segments) / num_lines;
+	float segment_width = 1.0 / num_lines;
+	health_range = vec2(0.0, segment_width * health_segments * health_percent);
+	armor_range = vec2(health_range.y, health_range.y + segment_width * armor_segments * armor_percent);
+	shield_range = vec2(armor_range.y, armor_range.y + segment_width * shield_segments * shield_percent);
+}
+
+// dark magic box from https://thebookofshaders.com/09/
+float box(vec2 _st, vec2 _size, float _smoothEdges){
+	_size = vec2(0.5) - _size * 0.5;
+	vec2 aa = vec2(_smoothEdges * 0.5);
+	vec2 uv = smoothstep(_size,_size+aa,_st);
+	uv *= smoothstep(_size, _size + aa, vec2(1.0) - _st);
+	return uv.x*uv.y;
+}
+
+
+void fragment() {
+	///
+	
+	
+	///
+	square_width = fract(0.9 - (10.0 / 100.0) + 0.05);
+	vec2 test = vec2(square_width, 0.9);
+	tiled_uv = vec2(fract(UV.x * num_lines), UV.y);
+	vec4 health_mask = vec4(box(tiled_uv, test, 0.0));//vec2(test, 0.9), 0.00));
+	if (UV.x > current_health){
+		COLOR = mix(background_color, no_health, health_mask);
+	}
+	else{
+		if (UV.x < health_range.y){
+			COLOR = mix(background_color, health_color, health_mask);
+		}
+		else if(UV.x < armor_range.y){
+			//COLOR = armor_color;
+			COLOR = mix(background_color, armor_color, health_mask);
+		}
+		else{
+			COLOR = mix(background_color, shield_color, health_mask);
+		}
+	}
+}"

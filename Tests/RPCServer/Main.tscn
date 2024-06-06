@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://jvmm0knsy3xg"]
+
+[ext_resource type="Script" path="res://Main.gd" id="1_v2qob"]
+[ext_resource type="PackedScene" uid="uid://dxvvrqonl6ecp" path="res://Networking/ProcessThread.tscn" id="2_d36xx"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_v2qob")
+
+[node name="ProcessThread" parent="." instance=ExtResource("2_d36xx")]

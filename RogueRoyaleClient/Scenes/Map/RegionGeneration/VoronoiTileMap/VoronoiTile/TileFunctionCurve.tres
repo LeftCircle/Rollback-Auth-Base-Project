@@ -1,0 +1,36 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+code = "shader_type canvas_item;
+
+uniform float k : hint_range(0.0, 1.0, 0.001) = 0.5;
+
+// a function that adds a sin wave of a given amplitude and frequency to the y coordinate
+float sin_wave(float y, float amplitude, float frequency){
+    return y + amplitude * sin(frequency * y);
+}
+
+float fok(vec2 uv, vec2 func){
+    float to_cube = max(k - length(uv - func), 0.0);
+    return (to_cube * to_cube * to_cube) / (6.0 * k * k);
+}
+
+void fragment(){
+    vec2 uv = UV;
+	float x = uv.x;
+	float y = uv.y;
+    y = smoothstep(0.0, 1.0, x);
+	y = sin_wave(y, 0.1, 10.0);
+    if (x >= 0.9){
+		y = max(y, 1) - fok(vec2(UV.x, UV.x), vec2(x, y));
+	}
+	//y = min(UV.x, y) - fok(vec2(UV.x, UV.x), vec2(UV.x, y));
+//	if (UV.x > 0.8){
+//		y = smoothstep(0.0, 1, UV.x);
+//    }
+	if (UV.y < y){
+        COLOR = vec4(1.0, 1.0, 1.0, 1.0);
+    } else{
+        COLOR = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+}"

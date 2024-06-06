@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Characters/PlayerCharacter/Scenes/PlayerGUI/PrimaryWeapon.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Placeholder/dagger.png" type="Texture2D" id=2]
+
+[node name="PrimaryWeaponIcon" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -992.0
+offset_bottom = -568.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 32.0
+offset_bottom = 32.0
+color = Color( 0.0588235, 0.054902, 0.054902, 0.145098 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

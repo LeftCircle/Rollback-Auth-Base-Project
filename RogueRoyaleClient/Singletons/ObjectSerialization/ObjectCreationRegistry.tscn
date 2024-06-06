@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bn1su10mhdd1p"]
+
+[ext_resource type="Script" path="res://Singletons/ObjectSerialization/C_ObjectCreationRegistry.gd" id="1"]
+[ext_resource type="Resource" path="res://Resources/FileListerResource.tres" id="2"]
+[ext_resource type="Script" path="res://Resources/FileLister.gd" id="4"]
+
+[sub_resource type="Resource" id="1"]
+script = ExtResource("4")
+folder_path = "res://Assets/Synced"
+file_ending = ".tres"
+with_sub_folders = true
+list_folders = false
+
+[node name="ObjectCreationRegistry" type="Node"]
+script = ExtResource("1")
+file_lister = ExtResource("2")
+synced_fx_file_lister = SubResource("1")

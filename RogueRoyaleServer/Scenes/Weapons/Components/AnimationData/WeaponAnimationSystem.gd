@@ -1,0 +1,4 @@
+extends AnimationPlayer
+class_name WeaponAnimationSystem
+
+

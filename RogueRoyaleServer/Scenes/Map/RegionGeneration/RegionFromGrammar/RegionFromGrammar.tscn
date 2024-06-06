@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://8yyab6obx0p"]
+
+[ext_resource type="Script" path="res://GraphGrammar/GraphBuilder/Resources/RuleApplier.gd" id="1"]
+[ext_resource type="Script" path="res://Scenes/Map/RegionGeneration/RegionFromGrammar/RegionFromGrammar.gd" id="1_knruk"]
+[ext_resource type="Resource" path="res://Scenes/Map/SpawnInfo/Players/PlayerSpawnRes.tres" id="2_q1muj"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/CollisionTextures/DiagonalCollisions.tscn" id="3"]
+[ext_resource type="PackedScene" path="res://Scenes/ServerCharacter/BasicPlayer.tscn" id="4"]
+[ext_resource type="PackedScene" path="res://Scenes/Map/RegionGeneration/RegionFromGrammar/ProceduralGeneration/PathsBetweenRoomGenerater.tscn" id="7"]
+
+[node name="RegionFromGrammar" type="Node2D"]
+script = ExtResource("1_knruk")
+base_path_to_grammars = "res://Scenes/Map/RegionGeneration/RegionFromGrammar/GrammarSaves"
+base_path_to_rooms = "res://Scenes/Map/DungeonRooms/RoomScenes"
+SpawnResource = ExtResource("2_q1muj")
+
+[node name="SpringContainer" type="Node2D" parent="."]
+
+[node name="NodeContainer" type="Node2D" parent="."]
+
+[node name="RoomContainer" type="Node2D" parent="."]
+
+[node name="BasicPlayer" parent="." instance=ExtResource("4")]
+
+[node name="FillerTiles" parent="." instance=ExtResource("3")]
+format = 2
+
+[node name="PathsBetweenRoomGenerator" parent="." instance=ExtResource("7")]
+
+[node name="GrammarRuleApplier" type="Node" parent="."]
+script = ExtResource("1")

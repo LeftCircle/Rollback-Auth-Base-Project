@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Scenes/Map/RegionGeneration/VoronoiTileMap/VoronoiTile/VoronoiEdgeTileMap.tres" type="Shader" id=1]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/is_corner_tyle = 0
+shader_param/corner_tyle_color = Color( 1, 1, 1, 1 )
+shader_param/dist_to_dot = 0.1
+shader_param/color = Color( 1, 0, 0, 1 )
+shader_param/random_point = Vector2( 0.5, 0.5 )
+shader_param/random_bottom_left = Vector2( 0, 0 )
+shader_param/bl_color = Color( 1, 1, 0.31, 1 )
+shader_param/random_bottom = Vector2( 0.5, 0 )
+shader_param/b_color = Color( 1, 1, 1, 1 )
+shader_param/random_bottom_right = Vector2( 1, 0 )
+shader_param/br_color = Color( 0.360784, 1, 0.933333, 1 )
+shader_param/random_left = Vector2( 0, 0.5 )
+shader_param/l_color = Color( 0.368627, 0.678431, 1, 1 )
+shader_param/random_right = Vector2( 1, 0.5 )
+shader_param/r_color = Color( 0.56, 1, 0.56, 1 )
+shader_param/random_top_left = Vector2( 0, 1 )
+shader_param/tl_color = Color( 0.670588, 0.25098, 1, 1 )
+shader_param/random_top = Vector2( 0.5, 1 )
+shader_param/t_color = Color( 0, 0, 0, 1 )
+shader_param/random_top_right = Vector2( 1, 1 )
+shader_param/tr_color = Color( 0.984314, 0.505882, 0.913725, 1 )
+
+[node name="ColorRect" type="ColorRect"]
+material = SubResource( 1 )
+offset_right = 64.0
+offset_bottom = 64.0

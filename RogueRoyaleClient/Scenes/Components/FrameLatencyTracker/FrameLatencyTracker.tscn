@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://be70p6yjedoqk"]
+
+[ext_resource type="Script" path="res://Singletons/Netcode/FrameLatency/ClientFrameLatencyTracker.gd" id="1"]
+
+[node name="FrameLatencyTracker" type="Node"]
+script = ExtResource("1")

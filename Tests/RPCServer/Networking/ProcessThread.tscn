@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxvvrqonl6ecp"]
+
+[ext_resource type="Script" path="res://Networking/ProcessThread.gd" id="1_sj3hl"]
+
+[node name="ProcessThread" type="Node"]
+script = ExtResource("1_sj3hl")

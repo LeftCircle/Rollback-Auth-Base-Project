@@ -1,0 +1,47 @@
+[gd_resource type="Shader" format=2]
+
+[resource]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+//uniform float current_health : hint_range(0.0, 1.0) = 1.0;
+uniform float max_ammo : hint_range(0.0, 100) = 5;
+uniform float current_ammo : hint_range(0.0, 100) = 5;
+
+
+uniform vec4 background_color : source_color = vec4(0.0, 0.0, 0.0, 1.0);
+uniform vec4 ammo_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform vec4 no_health : source_color = vec4(1.0, 1.0, 1.0, 0.5);
+uniform vec4 outline_color = vec4(1.0);
+varying vec2 tiled_uv;
+varying float square_width;
+varying float ammo_percent;
+
+
+// getting the segments in vertex for effeciency
+void vertex(){
+	ammo_percent = current_ammo / max_ammo;
+}
+
+// dark magic box from https://thebookofshaders.com/09/
+float box(vec2 _st, vec2 _size, float _smoothEdges){
+	_size = vec2(0.5) - _size * 0.5;
+	vec2 aa = vec2(_smoothEdges * 0.5);
+	vec2 uv = smoothstep(_size,_size+aa,_st);
+	uv *= smoothstep(_size, _size + aa, vec2(1.0) - _st);
+	return uv.x*uv.y;
+}
+
+
+void fragment() {
+	square_width = fract(0.9 - (10.0 / 100.0) + 0.05);
+	vec2 test = vec2(square_width, 0.9);
+	tiled_uv = vec2(fract(UV.x * max_ammo), UV.y);
+	vec4 health_mask = vec4(box(tiled_uv, test, 0.0));//vec2(test, 0.9), 0.00));
+	if (UV.x > ammo_percent){
+		COLOR = mix(background_color, no_health, health_mask);
+	}
+	else{
+		COLOR = mix(background_color, ammo_color, health_mask);
+	}
+}"

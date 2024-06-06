@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scenes/Map/CollisionTextures/DiagonalCollisions.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Map/DungeonDoors/TileDoor/S_TileDoor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomScenes/FirstFloor/NormalRooms/NormalRoom.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomDoorController.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/Map/DungeonRooms/RoomMobSpawner/RoomMobSpawner.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+size = Vector2( 512, 288 )
+
+[sub_resource type="RectangleShape2D" id=2]
+size = Vector2( 640, 416 )
+
+[node name="NormalRoom" type="Node2D"]
+script = ExtResource( 3 )
+width_and_height_tiles = Vector2( 16, 9 )
+border_size_tiles = 2
+
+[node name="RoomTiles" type="Node2D" parent="."]
+
+[node name="BorderTiles" type="Node2D" parent="."]
+
+[node name="DiagonalCollisions" parent="BorderTiles" instance=ExtResource( 1 )]
+tile_data = PackedInt32Array( -65538, -1610612736, 5, -65537, -1610612736, 6, -131072, -1610612736, 6, -131071, -1610612736, 6, -131070, -1610612736, 6, -131069, -1610612736, 6, -131068, -1610612736, 6, -131067, -1610612736, 6, -131066, -1610612736, 7, -131062, -1610612736, 5, -131061, -1610612736, 6, -131060, -1610612736, 6, -131059, -1610612736, 6, -131058, -1610612736, 6, -131057, -1610612736, 6, -131056, -1610612736, 6, -131055, -1610612736, 7, -2, -1610612736, 65541, -1, -1610612736, 196612, -65536, -1610612736, 131078, -65535, -1610612736, 131078, -65534, -1610612736, 131078, -65533, -1610612736, 131078, -65532, -1610612736, 131078, -65531, -1610612736, 131078, -65530, -1610612736, 131079, -65526, -1610612736, 131077, -65525, -1610612736, 131078, -65524, -1610612736, 131078, -65523, -1610612736, 131078, -65522, -1610612736, 131078, -65521, -1610612736, 131078, -65520, -1610612736, 196613, -65519, -1610612736, 65543, 65534, -1610612736, 65541, 65535, -1610612736, 65543, 16, -1610612736, 65541, 17, -1610612736, 65543, 131070, -1610612736, 65541, 131071, -1610612736, 65543, 65552, -1610612736, 65541, 65553, -1610612736, 65543, 196606, -1610612736, 131077, 196607, -1610612736, 131079, 131075, -1610612736, 65536, 131076, -1610612736, 2, 131077, -1610612736, 3, 131088, -1610612736, 131077, 131089, -1610612736, 131079, 196611, -1610612736, 65540, 262147, -1610612736, 131076, 262156, -1610612736, 4, 327692, -1610612736, 65540, 458750, -1610612736, 5, 458751, -1610612736, 7, 393226, -1610612736, 1, 393227, -1610612736, 2, 393228, -1610612736, 0, 393232, -1610612736, 5, 393233, -1610612736, 7, 524286, -1610612736, 65541, 524287, -1610612736, 65543, 458768, -1610612736, 65541, 458769, -1610612736, 65543, 589822, -1610612736, 65541, 589823, -1610612736, 65543, 524304, -1610612736, 65541, 524305, -1610612736, 65543, 655358, -1610612736, 65541, 655359, -1610612736, 262148, 589824, -1610612736, 6, 589825, -1610612736, 6, 589826, -1610612736, 6, 589827, -1610612736, 6, 589828, -1610612736, 6, 589829, -1610612736, 6, 589830, -1610612736, 7, 589834, -1610612736, 5, 589835, -1610612736, 6, 589836, -1610612736, 6, 589837, -1610612736, 6, 589838, -1610612736, 6, 589839, -1610612736, 6, 589840, -1610612736, 262149, 589841, -1610612736, 65543, 720894, -1610612736, 131077, 720895, -1610612736, 131078, 655360, -1610612736, 131078, 655361, -1610612736, 131078, 655362, -1610612736, 131078, 655363, -1610612736, 131078, 655364, -1610612736, 131078, 655365, -1610612736, 131078, 655366, -1610612736, 131079, 655370, -1610612736, 131077, 655371, -1610612736, 131078, 655372, -1610612736, 131078, 655373, -1610612736, 131078, 655374, -1610612736, 131078, 655375, -1610612736, 131078, 655376, -1610612736, 131078, 655377, -1610612736, 131079 )
+
+[node name="RoomMobSpawner" parent="." instance=ExtResource( 5 )]
+
+[node name="RoomMobSpawner" parent="RoomMobSpawner" index="0"]
+door_controller_path = NodePath("../../Doors")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomMobSpawner/RoomMobSpawner" index="0"]
+position = Vector2( 512, 288 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomMobSpawner/PlayerExitCheck" index="0"]
+position = Vector2( 512, 288 )
+shape = SubResource( 2 )
+
+[node name="Doors" type="Node2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="TestDoor" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 448, -128 )
+
+[node name="TestDoor2" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 448, 640 )
+
+[node name="TestDoor3" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( -128, 192 )
+is_horizontal = false
+
+[node name="TestDoor4" parent="Doors" instance=ExtResource( 2 )]
+position = Vector2( 1088, 192 )
+
+[editable path="RoomMobSpawner"]

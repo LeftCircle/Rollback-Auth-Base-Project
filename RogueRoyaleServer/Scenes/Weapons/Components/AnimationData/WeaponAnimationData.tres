@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://Scenes/Weapons/Components/AnimationData/BaseWeaponAnimationData.gd" type="Script" id=1]
+
+[resource]
+resource_local_to_scene = true
+script = ExtResource( 1 )
+max_sequence = 0
+attack_sequqnce = 0
+speed_mod = 0.0
+main_animation_ended = false
+is_finisher = false
+attack_direction = Vector2( 0, 0 )

@@ -1,0 +1,1 @@
+start C:\Godot\GodotBuilds\4.2.1ManualPhysics\godot-4.2.1-stable\bin\godot.windows.editor.x86_64.console.exe --path C:\RogueRoyale\RogueRoyaleClient

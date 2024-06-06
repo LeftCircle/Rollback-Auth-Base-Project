@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://c44dbq11vp40e"]
+
+[ext_resource type="PackedScene" path="res://Scenes/Weapons/Components/WeaponData.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://Scenes/Weapons/RangeWeapons/Bullets/BaseBulletRollback/Bullet.tscn" id="2"]
+[ext_resource type="Script" path="res://Scenes/Weapons/RangeWeapons/StarterPistol/S_StarterPistol.gd" id="3"]
+
+[sub_resource type="Animation" id="1"]
+step = 0.0166667
+
+[sub_resource type="Animation" id="2"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lnwtx"]
+_data = {
+"Fire": SubResource("1"),
+"RESET": SubResource("2")
+}
+
+[node name="Pistol" type="Node2D"]
+script = ExtResource("3")
+primary_ammunition = ExtResource("2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 2
+callback_mode_method = 1
+libraries = {
+"": SubResource("AnimationLibrary_lnwtx")
+}
+
+[node name="BulletContainer" type="Node" parent="."]
+
+[node name="WeaponData" parent="." instance=ExtResource("1")]
+is_ranged = true
+equip_type = 2
+base_damage = 15
+physical_hit_effect = 2
+max_sequence = 0
+attack_sequence = 0
+speed_mod = 1.0
+main_animation_ended = false
+is_looping = false
+damage_mod = 0.0
+knockback_mod = 0.0

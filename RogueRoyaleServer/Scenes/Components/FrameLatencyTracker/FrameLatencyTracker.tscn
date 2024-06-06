@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dg0qe0hp5yshr"]
+
+[ext_resource type="Script" path="res://Scenes/Components/FrameLatencyTracker/FrameLatencyTracker.gd" id="1"]
+
+[node name="FrameLatencyTracker" type="Node"]
+script = ExtResource("1")

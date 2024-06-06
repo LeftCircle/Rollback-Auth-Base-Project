@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cwn0skvy74b0v"]
+
+[ext_resource type="Script" path="res://Singletons/WorldState/Nodes/WorldStateFunctionQueue.gd" id="1"]
+
+[node name="WorldStateFunctionQueue" type="Node"]
+script = ExtResource("1")

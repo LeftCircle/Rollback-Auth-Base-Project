@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmdhnqjkn5htg"]
+
+[ext_resource type="Script" path="res://Singletons/WorldState/WorldState.gd" id="2"]
+
+[node name="WorldState" type="Node"]
+script = ExtResource("2")
