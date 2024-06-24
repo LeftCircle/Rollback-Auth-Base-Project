@@ -26,4 +26,3 @@ This is being done through a custom ECS plugin for Godot that I am also working 
 - Frame synchronization keeping all clients synced at the same frame ahead of the server
 - and more!
 
-This project was initially 
